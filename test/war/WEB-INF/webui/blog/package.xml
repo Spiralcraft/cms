@@ -1,0 +1,6 @@
+<vfs:Package
+  xmlns:vfs="class:/spiralcraft/vfs/"
+  >
+  <base>context://code/spiralcraft-cms/test-ui
+  </base>
+</vfs:Package>

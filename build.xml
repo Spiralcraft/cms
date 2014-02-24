@@ -1,0 +1,10 @@
+<project name="spiralcraft-cms" default="pack" basedir=".">
+
+  <property name="organization" value="spiralcraft"/>
+  <property name="module" value="cms"/>
+  <property name="buildVersion" value="0.4.17-dev1"/>
+  <property name="build.status" value="integration"/>
+  
+  <import file="../../build/build-common.xml"/>
+  
+</project>

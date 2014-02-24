@@ -1,0 +1,20 @@
+<base:NavFilter
+  xmlns:j="class:/java/lang/"
+  xmlns:swm="class:/spiralcraft/webapp/meta/"  
+  xmlns:base="context://code/spiralcraft-webapp/config/base/"
+  >
+  
+  <context.optionsX>
+      [{ 
+        [*swm:Path
+          { name:="blog"
+           ,path:="blog"
+           ,title:="Blog"
+           }
+        ]
+      }]
+    
+  </context.optionsX>
+    
+</base:NavFilter>
+  

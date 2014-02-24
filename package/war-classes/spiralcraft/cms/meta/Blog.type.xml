@@ -1,0 +1,39 @@
+<meta:Type
+  xmlns:meta="class:/spiralcraft/data/types/meta/"
+  xmlns:ju="class:/java/util/"
+  >
+  <fields>
+    <meta:SequenceField>
+      <name>id
+      </name>
+      <type><String.type/>
+      </type>
+    </meta:SequenceField>
+    
+    <meta:Field>
+      <name>creatorId
+      </name>
+      <description>The id of the User who created this blog
+      </description>
+      <type><String.type/>
+      </type>
+    </meta:Field>
+    
+    <meta:Field>
+      <name>createdDate
+      </name>
+      <type><Date.type/>
+      </type>
+      <defaultExpression>[@ju:Date].()
+      </defaultExpression>
+    </meta:Field>
+    
+    <meta:Field>
+      <name>title
+      </name>
+      <type><String.type/>
+      </type>
+    </meta:Field>
+
+  </fields>
+</meta:Type>

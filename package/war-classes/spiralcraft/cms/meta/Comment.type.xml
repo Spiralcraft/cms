@@ -1,0 +1,53 @@
+<meta:Type
+  xmlns:meta="class:/spiralcraft/data/types/meta/"
+  xmlns:ju="class:/java/util/"
+  >
+  <fields>
+    <meta:SequenceField>
+      <name>id
+      </name>
+      <type><LSID.type/>
+      </type>
+    </meta:SequenceField>
+    
+    <meta:Field>
+      <name>commenterId
+      </name>
+      <description>The id of the User who created this comment
+      </description>
+      <type><String.type/>
+      </type>
+    </meta:Field>
+    
+    <meta:Field>
+      <name>commentDate
+      </name>
+      <type><Date.type/>
+      </type>
+      <defaultExpression>[@ju:Date].()
+      </defaultExpression>
+    </meta:Field>
+    
+    <meta:Field>
+      <name>inReplyToId
+      </name>
+    
+      <type><LSID.type/>
+      </type>
+    </meta:Field>
+    
+    <meta:Field>
+      <name>contentType
+      </name>
+      <type><String.type/>
+      </type>
+    </meta:Field>
+
+    <meta:Field>
+      <name>content
+      </name>
+      <type><String.type/>
+      </type>
+    </meta:Field>
+  </fields>
+</meta:Type>

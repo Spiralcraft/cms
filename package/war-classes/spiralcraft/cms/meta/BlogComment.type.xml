@@ -1,0 +1,14 @@
+<meta:Type>
+
+  <archetype><cms:Comment/>
+  </archetype>
+  
+  <fields>
+    <meta:Field>
+      <name>blogPostId
+      </name>
+      <type><LSID.type/>
+      </type>
+    </meta:Field>
+  </fields>
+</meta:Type>
