@@ -1,0 +1,7 @@
+<%@doclet
+  tgns:theme="context://theme/"
+  %>
+  <%theme:activity-page%>
+    This is a blog post
+  <%/theme:activity-page%>
+<%/@doclet%>

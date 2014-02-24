@@ -1,6 +1,9 @@
-<meta:Type>
+<meta:Type
+  xmlns:meta="class:/spiralcraft/data/types/meta/"
+  xmlns:cms="class:/spiralcraft/cms/meta/"
+  >
 
-  <archetype><cms:Comment/>
+  <archetype><cms:Comment.type/>
   </archetype>
   
   <fields>

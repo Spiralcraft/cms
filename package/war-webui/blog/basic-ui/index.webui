@@ -2,6 +2,6 @@
   tgns:theme="context://theme/"
   %>
   <%theme:activity-page%>
-    This is the blog
+    This is the blog index
   <%/theme:activity-page%>
 <%/@doclet%>

@@ -7,4 +7,7 @@
   
   <import file="../../build/build-common.xml"/>
   
+  <target name="launch">
+    <ant antfile="LAUNCH.ant.xml" dir="test/run"/>
+  </target>
 </project>

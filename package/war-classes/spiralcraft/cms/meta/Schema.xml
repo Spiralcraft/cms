@@ -1,0 +1,19 @@
+<meta:Schema
+  xmlns:meta="class:/spiralcraft/data/types/meta/"
+  xmlns:cms="class:/spiralcraft/cms/meta/"
+  >
+  <entities>
+    <meta:Entity>
+      <type><cms:Blog.type/>
+      </type>
+    </meta:Entity>
+    <meta:Entity>
+      <type><cms:BlogComment.type/>
+      </type>
+    </meta:Entity>
+    <meta:Entity>
+      <type><cms:BlogPost.type/>
+      </type>
+    </meta:Entity>
+  </entities>
+</meta:Schema>

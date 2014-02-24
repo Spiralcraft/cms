@@ -1,0 +1,15 @@
+<conf-base:SqlStore
+  xmlns:conf-base="context://code/config/base/"
+  xmlns:cms="class:/spiralcraft/cms/meta/"
+  >
+  <name>spiralcraft-cms
+  </name>
+  
+  <schema dataURI="cms:Schema.xml"/>
+  
+  <debugLevel>INFO
+  </debugLevel>
+  
+        
+  
+</conf-base:SqlStore>

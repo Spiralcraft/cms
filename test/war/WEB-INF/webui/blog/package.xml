@@ -1,6 +1,6 @@
 <vfs:Package
   xmlns:vfs="class:/spiralcraft/vfs/"
   >
-  <base>context://code/spiralcraft-cms/test-ui
+  <base>context://code/spiralcraft-cms/blog/basic-ui/
   </base>
 </vfs:Package>

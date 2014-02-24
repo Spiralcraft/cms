@@ -1,0 +1,8 @@
+<base:PlaceContext
+  xmlns:base="context://package-base/config/"
+  xmlns:cms="context://code/spiralcraft-cms/config/"
+  >
+  <plugins>
+    <cms:Plugin/>
+  </plugins>
+</base:PlaceContext>
