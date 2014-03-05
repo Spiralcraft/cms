@@ -1,0 +1,12 @@
+<%@doclet
+  tgns:theme="context://theme/"
+  tgns:cms="class:/spiralcraft/cms/meta/"
+  tgns:blog="context://code/spiralcraft-cms/blog/components/"
+  %>
+  <div class="sc-cms-postSummary-panel">
+    <h2><%=title/%></h2>
+    <div class="sc-cms-post-content">
+      <%=content/%>
+    </div>
+  </div>
+<%/@doclet%>

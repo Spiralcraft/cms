@@ -16,6 +16,7 @@
     <dependency org="spiralcraft" name="distrib-common" rev="[0.4.17-dev,0.5)"/>
     <dependency org="spiralcraft" name="archetype" rev="[0.4.17-dev,0.5-dev["/>
     <dependency org="spiralcraft" name="webapp" rev="[0.4.17-dev,0.5-dev[" conf="dev->default"/>
+    <dependency org="moxiecode" name="tinymce" rev="[4.0.1,5.0[" conf="dev->default"/>
 
     <exclude artifact="spiralcraft-core-test"/>
 

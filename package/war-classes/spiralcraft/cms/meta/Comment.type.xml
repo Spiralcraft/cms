@@ -20,6 +20,16 @@
     </meta:Field>
     
     <meta:Field>
+      <name>displayName
+      </name>
+      <description>The name to display in place of the commenter's user
+        display name or if the comment is anonymous
+      </description>
+      <type><String.type/>
+      </type>
+    </meta:Field>
+    
+    <meta:Field>
       <name>commentDate
       </name>
       <type><Date.type/>
@@ -31,7 +41,9 @@
     <meta:Field>
       <name>inReplyToId
       </name>
-    
+      <description>
+        The id of the comment being replied to
+      </description>
       <type><LSID.type/>
       </type>
     </meta:Field>

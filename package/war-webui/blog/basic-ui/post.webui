@@ -1,7 +1,10 @@
 <%@doclet
-  tgns:theme="context://theme/"
+  tgns:t="context://theme/"
+  tgns:c="context://code/components/"
+  tgns:h="context://code/components/html"
   %>
-  <%theme:activity-page%>
+  <%h:Stylesheet href="{|[c:page].cssURI|}/css/spiralcraft-cms/blog.css"/%>
+  <%t:activity-page%>
     This is a blog post
-  <%/theme:activity-page%>
+  <%/t:activity-page%>
 <%/@doclet%>
