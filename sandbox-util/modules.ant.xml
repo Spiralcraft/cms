@@ -1,0 +1,29 @@
+<project name="repo-modules" basedir=".">
+  
+  <repo-inst org="spiralcraft" module="core" rev="[0.4.17-dev,0.4.18-dev["/>
+  <repo-inst org="spiralcraft" module="distrib-webfocus" rev="[0.4.17-dev,0.4.18-dev["/>
+  <repo-inst org="spiralcraft" module="distrib-common" rev="[0.4.17-dev,0.4.18-dev["/>
+  <repo-inst org="spiralcraft" module="servlet" rev="[0.4.17-dev,0.4.18-dev["/>
+  <repo-inst org="spiralcraft" module="json" rev="[0.4.17-dev,0.4.18-dev["/>
+  <repo-inst org="spiralcraft" module="pioneer" rev="[0.4.17-dev,0.4.18-dev["/>
+  <repo-inst org="spiralcraft" module="launcher" rev="[0.4.17-dev,0.4.18-dev["/>
+  <repo-inst org="spiralcraft" module="admin" rev="[0.4.17-dev,0.4.18-dev["/>
+  <repo-inst org="spiralcraft" module="net" rev="[0.4.17-dev,0.4.18-dev["/>
+  <repo-inst org="spiralcraft" module="textgen" rev="[0.4.17-dev,0.4.18-dev["/>
+  <repo-inst org="spiralcraft" module="gui" rev="[0.4.17-dev,0.4.18-dev["/>
+  <repo-inst org="spiralcraft" module="archetype" rev="[0.4.17-dev,0.4.18-dev["/>
+  <repo-inst org="spiralcraft" module="jsclient" rev="[0.4.17-dev,0.4.18-dev["/>
+  <repo-inst org="spiralcraft" module="sql" rev="[0.4.17-dev,0.4.18-dev["/>
+  <repo-inst org="spiralcraft" module="shell" rev="[0.4.17-dev,0.4.18-dev["/>
+  <repo-inst org="spiralcraft" module="webapp" rev="[0.4.17-dev,0.4.18-dev["/>
+  
+  <repo-inst org="java" module="servlet-api" rev="2.4"/>
+  <repo-inst org="hsqldb" module="hsqldb" rev="2.3.0"/>
+  <repo-inst org="postgresql" module="jdbc4" rev="9.0"/>
+  <repo-inst org="mysql" module="connector-java" rev="5.1.26"/>
+
+  <repo-inst org="kelvinluck" module="jscrollpane" rev="2.0.17"/>
+  <repo-inst org="jquery" module="core" rev="1.8.3"/>
+  <repo-inst org="moxiecode" module="tinymce" rev="[4.0.1,5.0["/>
+  
+</project>

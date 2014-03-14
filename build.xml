@@ -4,10 +4,10 @@
   <property name="module" value="cms"/>
   <property name="buildVersion" value="0.4.17-dev1"/>
   <property name="build.status" value="integration"/>
-  
+  <property name="depends.dir" location="../../repo"/>
   <import file="../../build/build-common.xml"/>
   
-  <target name="launch">
+  <target name="launch" description="Launch test server">
     <ant antfile="LAUNCH.ant.xml" dir="test/run"/>
   </target>
 </project>
