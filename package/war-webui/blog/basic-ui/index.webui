@@ -1,7 +1,19 @@
 <%@doclet
   tgns:theme="context://theme/"
+  tgns:cms="class:/spiralcraft/cms/meta/"
+  tgns:blog="context://code/spiralcraft-cms/blog/components/"
+  tgns:dtask="class:/spiralcraft/data/task/"
   %>
   <%theme:activity-page%>
-    This is the blog index
+    <a href="edit">New Entry</a>
+    <%With x="[*dtask:Fetch{[@cms:BlogPost.list]}].()"%>
+      <ul>
+        <%Iterate%>
+          <li>
+          <%blog:postSummary-panel/%>
+          </li>
+        <%/Iterate%>
+      </ul>
+    <%/With%>
   <%/theme:activity-page%>
 <%/@doclet%>
