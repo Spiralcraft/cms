@@ -6,10 +6,24 @@
   tgns:h="context://code/components/html/"
   tgns:c="context://code/components/"
   tgns:j="class:/java/lang/"
-  
-  %>
-  
+  %>      
   <%t:activity-page%>
+    <%h:Script src="/js/moxiecode-tinymce/tinymce.min.js" target="HEAD"/%>
+    <%h:Script target="HEAD"
+      code='
+        tinymce.init({
+          selector: "textarea.richtext",
+          plugins: "link code",
+          forced_root_block: false,
+          toolbar: "undo redo | bold italic underline | bullist numlist link unlink | code ",
+          menubar: false,
+          statusbar: false,
+          resize: false,
+          invalid_elements: "span",
+          extended_valid_elements : "br[style:]"
+        });
+      '
+    /%>  
     <%h:Stylesheet href="{|[c:page].cssURI|}/spiralcraft-cms/blog.css" target="HEAD"/%>  
     <%c:RequestData includeNames="id"
       x='[#edit] 
@@ -27,7 +41,7 @@
           <%/h:FormField%>
           <%h:FormField%>
             <%h:Label%>Content<%/h:Label%>
-            <%h:TextArea x="content" tag.cols="80" tag.rows="25"/%>
+            <%h:TextArea x="content" tag.clazz="richtext" tag.cols="80" tag.rows="25"/%>
           <%/h:FormField%>
           <div class="sc-webui-form-buttonbar">
             <%h:Button onAction="[h:Form].save()"%>Save<%/h:Button%>
