@@ -2,9 +2,26 @@
   tgns:t="context://theme/"
   tgns:c="context://code/components/"
   tgns:h="context://code/components/html"
+  tgns:af="class:/spiralcraft/servlet/autofilter/"
+  tgns:cms="class:/spiralcraft/cms/meta/"
+  tgns:fsm="class:/spiralcraft/fsm/"
   %>
-  <%h:Stylesheet href="{|[c:page].cssURI|}/css/spiralcraft-cms/blog.css"/%>
-  <%t:activity-page%>
-    This is a blog post
-  <%/t:activity-page%>
+
+
+    
+  <%Switch 
+    x='[cms:BlogContext].pathInfo.firstElement()
+        { .=="post"
+          ?"edit"
+          :"view"
+        }'
+    %>
+    <%Case id="view"%>
+      <%view/%>
+    <%/Case%>
+    <%Case id="edit"%>
+      <%edit/%>
+    <%/Case%>
+  <%/Switch%>
+
 <%/@doclet%>

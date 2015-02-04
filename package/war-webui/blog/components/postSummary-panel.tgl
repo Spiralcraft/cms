@@ -4,9 +4,11 @@
   tgns:blog="context://code/spiralcraft-cms/blog/components/"
   %>
   <div class="sc-cms-postSummary-panel">
-    <h2 class="sc-cms-post-title"><%=title/%></h2>
+    <h2 class="sc-cms-post-title"><a href="<%=slug/%>"><%=title/%></a></h2>
     <div class="sc-cms-post-dateline">
       <%DateFormat x="publishDate" format="EEEE, MMMM d, yyyy  h:mm a"/%>
+    </div>
+    <div class="sc-cms-post-actions">
     </div>
     <div class="sc-cms-post-content">
       <%=content/%>

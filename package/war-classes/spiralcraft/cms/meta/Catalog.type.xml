@@ -1,0 +1,28 @@
+<meta:Type
+  xmlns:meta="class:/spiralcraft/data/types/meta/"
+  xmlns:ju="class:/java/util/"
+  xmlns:cms="class:/spiralcraft/cms/meta/"
+  xmlns:dt="class:/spiralcraft/data/task/"
+  xmlns:j="class:/java/lang/"
+  >
+  <description>A self contained collection of content that is maintained and
+    published according to a common set of rules and methods.
+  </description>
+  
+  <fields>
+    <meta:SequenceField>
+      <name>id
+      </name>
+      <type><String.type/>
+      </type>
+    </meta:SequenceField>
+  </fields>
+  <keys>
+    <meta:Key>
+      <primary>true
+      </primary>
+      <fieldList>id
+      </fieldList>
+    </meta:Key>
+  </keys>
+</meta:Type>

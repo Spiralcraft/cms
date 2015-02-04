@@ -1,0 +1,49 @@
+<meta:Type
+  xmlns:meta="class:/spiralcraft/data/types/meta/"
+  xmlns:ju="class:/java/util/"
+  xmlns:cms="class:/spiralcraft/cms/meta/"
+  xmlns:dt="class:/spiralcraft/data/task/"
+  xmlns:j="class:/java/lang/"
+  >
+  <description>A non-persistent type that provides 
+    access to a content catalog.
+  </description>
+  
+  <fields>
+    <meta:Field>
+      <name>catalogId
+      </name>
+      <type><String.type/>
+      </type>
+    </meta:Field>
+    <meta:RelativeField>
+      <name>catalog
+      </name>
+      <type><cms:Catalog.type/>
+      </type>
+      <fieldList>catalogId
+      </fieldList>
+    </meta:RelativeField>
+  </fields>
+  
+  <methods>
+    <meta:TransactionMethod>
+      <name>ensureCatalog
+      </name>
+      <returnType><cms:Catalog.type/>
+      </returnType>
+      <x>
+        catalog
+          {.==null
+            ?.[*dt:Edit
+                { autoCreate:=true
+                , forceSave:=true
+                , preSave:=`.id=[cms:CatalogContext].catalogId`
+                }
+              ].()
+            :.
+          }
+      </x>
+    </meta:TransactionMethod>
+  </methods>
+</meta:Type>

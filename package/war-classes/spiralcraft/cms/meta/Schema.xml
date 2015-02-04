@@ -4,6 +4,10 @@
   >
   <entities>
     <meta:Entity>
+      <type><cms:Catalog.type/>
+      </type>
+    </meta:Entity>
+    <meta:Entity>
       <type><cms:Blog.type/>
       </type>
     </meta:Entity>

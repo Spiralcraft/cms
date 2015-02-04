@@ -1,0 +1,56 @@
+<meta:Type
+  xmlns:meta="class:/spiralcraft/data/types/meta/"
+  xmlns:ju="class:/java/util/"
+  xmlns:cms="class:/spiralcraft/cms/meta/"
+  xmlns:dt="class:/spiralcraft/data/task/"
+  xmlns:j="class:/java/lang/"
+  >
+  <description>A non-persistent type that provides constant-scoped components
+    access to a blog
+  </description>
+  
+  <fields>
+    <meta:Field>
+      <name>blogId
+      </name>
+      <type><String.type/>
+      </type>
+    </meta:Field>
+    <meta:RelativeField>
+      <name>blog
+      </name>
+      <type><cms:Blog.type/>
+      </type>
+      <fieldList>blogId
+      </fieldList>
+    </meta:RelativeField>
+    <meta:Field>
+      <name>blogPath
+      </name>
+      <type><String.type/>
+      </type>
+    </meta:Field>
+    <meta:Field>
+      <name>pathInfo
+      </name>
+      <type><Path.type/>
+      </type>
+    </meta:Field>
+  </fields>
+  
+  <methods>
+    <meta:TransactionMethod>
+      <name>ensureBlog
+      </name>
+      <returnType><cms:Blog.type/>
+      </returnType>
+      <x>
+        blog
+          {.==null
+            ?[@cms:Blog].ensureBlog(blogId)
+            :.
+          }
+      </x>
+    </meta:TransactionMethod>
+  </methods>
+</meta:Type>

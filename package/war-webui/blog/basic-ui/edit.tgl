@@ -1,0 +1,82 @@
+<%@doclet
+  tgns:t="context://theme/"
+  tgns:cms="class:/spiralcraft/cms/meta/"
+  tgns:blog="context://code/spiralcraft-cms/blog/components/"
+  tgns:dtask="class:/spiralcraft/data/task/"
+  tgns:h="context://code/components/html/"
+  tgns:c="context://code/components/"
+  tgns:j="class:/java/lang/"
+  tgns:af="class:/spiralcraft/servlet/autofilter/"
+  tgns:su="class:/spiralcraft/util/"
+  %>      
+  <%t:activity-page%>
+    <%h:Script src="/js/moxiecode-tinymce/tinymce.min.js" target="HEAD"/%>
+    <%h:Script target="HEAD"
+      code='
+        tinymce.init({
+          selector: "textarea.richtext",
+          plugins: "link code",
+          forced_root_block: false,
+          toolbar: "undo redo | bold italic underline | bullist numlist link unlink | code ",
+          menubar: false,
+          statusbar: false,
+          resize: false,
+          invalid_elements: "span",
+          extended_valid_elements : "br[style:]"
+        });
+      '
+    /%>  
+    <%h:Stylesheet href="{|[c:page].cssURI|}/spiralcraft-cms/blog.css"/%>  
+    <%With x='{ id:=[cms:BlogContext].pathInfo.lastElement()
+               ,new:=.id=="new"
+               ,post:=!.new?[cms:BlogContext].blog.postForId(.id):null
+              }'
+      %>
+      <%If x="!new && post==null"%>
+        <%c:Redirect locationX="[cms:BlogContext].blogPath"/%>
+      <%Else/%>
+
+        <div class="sc-action-button-bar">
+          <%If x="!new"%>
+            <a href="<%=[cms:BlogContext].blogPath+post.slug/%>" class="button">View Post</a>
+          <%/If%>
+          <a href="<%=[cms:BlogContext].blogPath/%>" class="button">Return to blog</a>
+        </div>
+        <%h:Form 
+          tag.clazz="blog-post-editor data-entry"
+          afterSave='new?[*c:UI].redirect(post.id):null'
+          %>
+          <%h:TupleEditor x="post" autoCreate="true"
+            preSave="blogId=[cms:BlogContext].blogId"
+            %>
+            <ul class="sc-labeled-control-flow">
+              <li>
+                <%h:FormField%>
+                  <%h:Label%>Title<%/h:Label%>
+                  <%h:TextInput x="title"/%>
+                <%/h:FormField%>
+              </li>
+              <li>
+                <%h:FormField%>
+                  <%h:Label%>URL slug<%/h:Label%>
+                  <%h:TextInput x="slug"/%>
+                <%/h:FormField%>
+              </li>
+              <li>
+                <%h:FormField%>
+                  <%h:Label%>Content<%/h:Label%>
+                  <%h:TextArea x="content" tag.clazz="richtext" tag.cols="80" tag.rows="25"/%>
+                <%/h:FormField%>
+              </li>
+            </ul>
+            <div class="sc-form-button-bar">
+              <%h:Button onAction="[h:Form].save()"%>Save<%/h:Button%>
+              <%h:Button onAction='[h:Form].revert()'%>Cancel<%/h:Button%>
+              <%h:Button onAction='@{ @tuple.delete(),[h:Form].save()}' tag.clazz="right"%>Delete<%/h:Button%>
+            </div>
+          <%/h:TupleEditor%>
+        <%/h:Form%>
+      <%/If%>
+    <%/With%>
+  <%/t:activity-page%>
+<%/@doclet%>

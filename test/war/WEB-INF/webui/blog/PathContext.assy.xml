@@ -1,0 +1,22 @@
+<base:PathContext
+  xmlns:base="context://package-base/"
+  xmlns:cms="class:/spiralcraft/cms/meta/"
+  xmlns:af="class:/spiralcraft/servlet/autofilter/"
+  xmlns:su="class:/spiralcraft/util/"
+  >
+
+  <constantImports>
+    [@cms:CatalogContext].(catalogId:="default-blog")
+      { .ensureCatalog()
+      , .
+      }.@log("CatalogContext="+.)
+  </constantImports>
+  
+  <exports>
+    [@cms:BlogContext]
+      .(blogPath:=[af:PathContext].absolutePathString
+       ,blogId:=[cms:CatalogContext].catalogId
+       ,pathInfo:=[@su:Path].([af:PathContext].pathInfo)
+       )
+  </exports>
+</base:PathContext>

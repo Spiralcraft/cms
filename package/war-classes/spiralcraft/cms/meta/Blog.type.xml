@@ -1,6 +1,9 @@
 <meta:Type
   xmlns:meta="class:/spiralcraft/data/types/meta/"
   xmlns:ju="class:/java/util/"
+  xmlns:cms="class:/spiralcraft/cms/meta/"
+  xmlns:dt="class:/spiralcraft/data/task/"
+  xmlns:j="class:/java/lang/"
   >
   <fields>
     <meta:SequenceField>
@@ -34,6 +37,115 @@
       <type><String.type/>
       </type>
     </meta:Field>
+    <meta:RelativeField>
+      <name>posts
+      </name>
+      <type><cms:BlogPost.list.type/>
+      </type>
+      <referencedFieldList>blogId
+      </referencedFieldList>
+    </meta:RelativeField>
 
   </fields>
+  <keys>
+    <meta:Key>
+      <primary>true
+      </primary>
+      <fieldList>id
+      </fieldList>
+    </meta:Key>
+  </keys>
+  <methods>
+    <meta:Method>
+      <name>forId
+      </name>
+    
+      <static>true
+      </static>
+      
+      <parameterTypes>
+        <String.type/>
+      </parameterTypes>
+      
+      <returnType><cms:Blog.type/>
+      </returnType>
+      
+      <contextX>
+        [#p] { id:[@j:String] }
+      </contextX>
+      
+      <x>[*dt:Fetch{[@cms:Blog],[{ `id:=[p].id` }]}].()
+      </x>
+      
+    </meta:Method>
+    <meta:TransactionMethod>
+      <name>ensureBlog
+      </name>
+      <parameterTypes>
+        <String.type/>
+      </parameterTypes>
+      <returnType><cms:Blog.type/>
+      </returnType>
+      <static>true
+      </static>
+      <contextX>
+        [#p] { id:[@j:String] }
+      </contextX>
+      <x>
+        [@cms:Blog].@forId([p].id)
+          {.==null
+            ?.[*dt:Edit
+                { autoCreate:=true
+                , forceSave:=true
+                , preSave:=`.id=[p].id`
+                }
+              ].()
+            :.
+          }
+      </x>
+    </meta:TransactionMethod>    
+    <meta:Method>
+      <name>postForSlug
+      </name>
+      
+      <parameterTypes>
+        <String.type/>
+      </parameterTypes>
+      
+      <returnType><cms:BlogPost.type/>
+      </returnType>
+      
+      <contextX>
+        [#p] { slug:[@j:String] }
+      </contextX>
+      
+      <x>[*dt:Fetch{[@cms:BlogPost],[{ `blogId:=[cms:Blog].id`,`slug:=[p].slug` }]}].()
+      </x>
+      
+    </meta:Method>    
+    <meta:Method>
+      <name>postForId
+      </name>
+      
+      <parameterTypes>
+        <String.type/>
+      </parameterTypes>
+      
+      <returnType><cms:BlogPost.type/>
+      </returnType>
+      
+      <contextX>
+        [#p] { id:[@j:String] }
+      </contextX>
+      
+      <x>
+        [*dt:Fetch{[@cms:BlogPost],[{ `id:=[p].id` }]}].()
+          { .blogId==[cms:Blog].id
+            ?.
+            :null
+          }
+      </x>
+      
+    </meta:Method>    
+  </methods>
 </meta:Type>

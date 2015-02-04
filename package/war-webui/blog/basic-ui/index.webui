@@ -5,20 +5,24 @@
   tgns:dtask="class:/spiralcraft/data/task/"
   %>
   <%theme:activity-page activityClass="blog-index-activity"%>
-    <div class="activity-actions">
-      <a href="edit">New Entry</a>
-    </div>
-    
-    <div class="sc-cms-post-index">
-      <%With x="[*dtask:Fetch{[@cms:BlogPost.list]}].()"%>
-        <ul>
-          <%Iterate%>
-            <li>
-            <%blog:postSummary-panel/%>
-            </li>
-          <%/Iterate%>
-        </ul>
-      <%/With%>
-    </div>
+    <%With x="[cms:BlogContext].blog"%>
+      
+      <h2><%=title{.!=null?.:id}/%></h2>
+      <div class="activity-actions">
+        <a href="post/new">New Entry</a>
+      </div>
+      
+      <div class="sc-cms-post-index">
+        <%With x="posts"%>
+          <ul>
+            <%Iterate%>
+              <li>
+              <%blog:postSummary-panel/%>
+              </li>
+            <%/Iterate%>
+          </ul>
+        <%/With%>
+      </div>
+    <%/With%>
   <%/theme:activity-page%>
 <%/@doclet%>

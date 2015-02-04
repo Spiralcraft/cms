@@ -1,0 +1,14 @@
+<base:Context
+  xmlns:base="context://package-base/"
+  xmlns:httpd="class:/spiralcraft/pioneer/httpd/"
+  xmlns:autofilter="class:/spiralcraft/servlet/autofilter/"
+  >
+  <initParameters>
+    <httpd:InitParameter>
+      <name>spiralcraft.servlet.showExceptions
+      </name>
+      <value>true
+      </value>
+    </httpd:InitParameter>  
+  </initParameters>
+</base:Context>

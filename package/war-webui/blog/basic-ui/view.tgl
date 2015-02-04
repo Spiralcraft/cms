@@ -1,0 +1,26 @@
+<%@doclet
+  tgns:t="context://theme/"
+  tgns:c="context://code/components/"
+  tgns:h="context://code/components/html/"
+  tgns:af="class:/spiralcraft/servlet/autofilter/"
+  tgns:cms="class:/spiralcraft/cms/meta/"
+  %>
+  <%t:activity-page%>
+    <%h:Stylesheet href="{|[c:page].cssURI|}/spiralcraft-cms/blog.css" /%>
+    <%With x='[cms:BlogContext].blog.postForSlug([cms:BlogContext].pathInfo.toString())'
+      %>
+      <div class="sc-cms-post-panel">
+        <h2 class="sc-cms-post-title"><%=title/%></h2>
+        <div class="sc-cms-post-dateline">
+          <%DateFormat x="publishDate" format="EEEE, MMMM d, yyyy  h:mm a"/%>
+        </div>
+        <div class="sc-cms-post-actions sc-action-button-bar">
+          <%h:Link tag.clazz="button" onAction='[*c:UI].redirect([cms:BlogContext].blogPath+"post/"+.id)'%>Edit<%/h:Link%>
+        </div>
+        <div class="sc-cms-post-content">
+          <%=content/%>
+        </div>
+      </div>      
+    <%/With%>
+  <%/t:activity-page%>
+<%/@doclet%>
