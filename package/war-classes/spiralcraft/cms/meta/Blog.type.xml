@@ -4,6 +4,8 @@
   xmlns:cms="class:/spiralcraft/cms/meta/"
   xmlns:dt="class:/spiralcraft/data/task/"
   xmlns:j="class:/java/lang/"
+  xmlns:us="class:/spiralcraft/util/string/"
+  xmlns:fn="class:/spiralcraft/lang/functions/"
   >
   <fields>
     <meta:SequenceField>
@@ -146,6 +148,35 @@
           }
       </x>
       
-    </meta:Method>    
+    </meta:Method>  
+    <meta:Method>
+      <name>makeSlug
+      </name>
+      <parameterTypes>
+        <cms:BlogPost.type/>
+      </parameterTypes>
+      <returnType><String.type/>
+      </returnType>
+      <contextX>
+        [#p] { post:[@cms:BlogPost] }
+      </contextX>
+      <x>
+        post.publishDate
+          {.==null?[@ju:Date].():.}
+          .[*fn:ToString{ [*us:DateToString{"yyyy/MM/dd/" }] }]
+          +post.title.toCharArray()
+            #{ (.&gt;='0' &amp;&amp; .&lt;='9')
+               || (.&gt;='A' &amp;&amp; .&lt;='Z')
+               || (.&gt;='a' &amp;&amp; .&lt;='z')
+               ?.
+               :(.==' ' || .=='-' || .=='_')
+               ?'-'
+               :null
+            }
+            [.!=null]
+            { [@j:String].(.)
+            }
+      </x>
+    </meta:Method>  
   </methods>
 </meta:Type>

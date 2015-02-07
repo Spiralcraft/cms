@@ -47,19 +47,17 @@
           afterSave='new?[*c:UI].redirect(post.id):null'
           %>
           <%h:TupleEditor x="post" autoCreate="true"
-            preSave="blogId=[cms:BlogContext].blogId"
+            preSave='@{ blogId=[cms:BlogContext].blogId
+                      , slug=[cms:BlogContext].blog.makeSlug(.)
+                      }
+                    '
             %>
+            
             <ul class="sc-labeled-control-flow">
               <li>
                 <%h:FormField%>
                   <%h:Label%>Title<%/h:Label%>
-                  <%h:TextInput x="title"/%>
-                <%/h:FormField%>
-              </li>
-              <li>
-                <%h:FormField%>
-                  <%h:Label%>URL slug<%/h:Label%>
-                  <%h:TextInput x="slug"/%>
+                  <%h:TextInput x="title" tag.size="60"/%>
                 <%/h:FormField%>
               </li>
               <li>
