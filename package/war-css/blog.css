@@ -2,3 +2,42 @@ form.blog-post-editor label
 {
   display:block;
 }
+
+h2.sc-cms-post-title
+{
+  margin-bottom: .25em;
+}
+
+div.sc-cms-post-dateline
+{
+  font-size: 75%;
+  font-weight: bold;
+}
+
+div.sc-cms-post-actions
+{
+  margin: 0.25em 0;
+}
+
+div.sc-cms-post-content
+{
+  margin-top: 1em;
+  padding-bottom: 0.5em;
+}
+
+div.sc-cms-post-index > ul
+{
+  list-style: none;
+  padding-left: 0;
+}
+
+div.sc-cms-post-index > ul > li
+{
+  background: #EEEEEE;
+}
+
+div.sc-cms-post-index > ul h2.sc-cms-post-title
+{
+  margin-top: .25em;
+}
+
