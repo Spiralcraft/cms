@@ -8,7 +8,9 @@
   tgns:j="class:/java/lang/"
   tgns:af="class:/spiralcraft/servlet/autofilter/"
   tgns:su="class:/spiralcraft/util/"
-  %>      
+  tgns:swa="class:/spiralcraft/webapp/meta/"
+  %>    
+  
   <%t:activity-page%>
     <%h:Script src="/js/moxiecode-tinymce/tinymce.min.js" target="HEAD"/%>
     <%h:Script target="HEAD"
@@ -32,6 +34,12 @@
                ,post:=!.new?[cms:BlogContext].blog.postForId(.id):null
               }'
       %>
+      <%If x="!new && ![cms:BlogContext].canEdit([swa:Session].user,post)
+           || new && ![cms:BlogContext].canPost([swa:Session].user)       
+          "
+        %>
+        <%c:Redirect locationX="[cms:BlogContext].blogPath"/%>
+      <%/If%>
       <%If x="!new && post==null"%>
         <%c:Redirect locationX="[cms:BlogContext].blogPath"/%>
       <%Else/%>
@@ -49,8 +57,11 @@
           <%h:TupleEditor x="post" autoCreate="true"
             preSave='@{ blogId=[cms:BlogContext].blogId
                       , slug=[cms:BlogContext].blog.makeSlug(.)
+                      , creatorId=(creatorId==null?[swa:Session].user.id:creatorId)
                       }
                     '
+            errorTag.tagName="div"
+            errorTag.clazz="error"
             %>
             
             <ul class="sc-labeled-control-flow">

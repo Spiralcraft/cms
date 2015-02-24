@@ -4,23 +4,36 @@
   tgns:h="context://code/components/html/"
   tgns:af="class:/spiralcraft/servlet/autofilter/"
   tgns:cms="class:/spiralcraft/cms/meta/"
+  tgns:swa="class:/spiralcraft/webapp/meta/"
   %>
-  <%t:activity-page%>
-    <%h:Stylesheet href="{|[c:page].cssURI|}/spiralcraft-cms/blog.css" /%>
-    <%With x='[cms:BlogContext].blog.postForSlug([cms:BlogContext].pathInfo.toString())'
+  <%With x='[cms:BlogContext].blog.postForSlug([cms:BlogContext].pathInfo.toString())'
+    %>
+    <%If x=".==null"%>
+      <%c:Redirect locationX="[cms:BlogContext].blogPath"/%>
+    <%/If%>
+    <%t:activity-page activityClass="blog-post-activity" 
+      activityTitle="{|[cms:BlogContext].blog.title|} - {|[cms:BlogPost].title|}"
+      displayTitle="false"
       %>
+      <%h:Stylesheet href="{|[c:page].cssURI|}/spiralcraft-cms/blog.css" /%>
+      <div class="sc-cms-post-actions sc-action-button-bar">
+        <a href="<%=[cms:BlogContext].blogPath/%>" class="button">Return to blog</a>
+        <%If x="[cms:BlogContext].canEdit([swa:Session].user,.)"%>
+          <a href='<%=[cms:BlogContext].blogPath+"post/"+.id/%>' class="button">Edit this post</a>
+        <%/If%>
+      </div>
+      
       <div class="sc-cms-post-panel">
         <h2 class="sc-cms-post-title"><%=title/%></h2>
         <div class="sc-cms-post-dateline">
-          <%DateFormat x="publishDate" format="EEEE, MMMM d, yyyy  h:mm a"/%>
+          Posted by <%=[@swa:User].@forId(creatorId).commonName/%> on <%DateFormat x="publishDate" format="EEEE, MMMM d, yyyy  h:mm a"/%>
         </div>
         <div class="sc-cms-post-actions sc-action-button-bar">
-          <%h:Link tag.clazz="button" onAction='[*c:UI].redirect([cms:BlogContext].blogPath+"post/"+.id)'%>Edit<%/h:Link%>
         </div>
         <div class="sc-cms-post-content">
           <%=content/%>
         </div>
       </div>      
-    <%/With%>
-  <%/t:activity-page%>
+    <%/t:activity-page%>
+  <%/With%>
 <%/@doclet%>

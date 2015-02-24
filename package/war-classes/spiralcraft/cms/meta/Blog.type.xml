@@ -150,6 +150,30 @@
       
     </meta:Method>  
     <meta:Method>
+      <name>postForExternalId
+      </name>
+      
+      <parameterTypes>
+        <String.type/>
+      </parameterTypes>
+      
+      <returnType><cms:BlogPost.type/>
+      </returnType>
+      
+      <contextX>
+        [#p] { id:[@j:String] }
+      </contextX>
+      
+      <x>
+        [*dt:Fetch
+          {[@cms:BlogPost]
+          ,[{ `blogId:=[cms:Blog].id`,`externalId:=[p].id` }]
+          }
+        ].()
+      </x>
+      
+    </meta:Method>  
+    <meta:Method>
       <name>makeSlug
       </name>
       <parameterTypes>
@@ -174,9 +198,25 @@
                :null
             }
             [.!=null]
-            { [@j:String].(.)
+            { [@j:String].(.).toLowerCase()
             }
       </x>
     </meta:Method>  
+    <meta:Method>
+      <name>rangeOfPosts
+      </name>
+      <parameterTypes>
+        <Integer.type/>
+        <Integer.type/>
+      </parameterTypes>
+      <returnType><cms:BlogPost.list.type/>
+      </returnType>
+      <contextX>
+        [#p] { offset:[@j:Integer], size:[@j:Integer] }
+      </contextX>
+      <x>
+        [cms:Blog].posts.[*fn:Sort{`.publishDate`,true}][offset..(offset+size)]
+      </x>
+    </meta:Method>    
   </methods>
 </meta:Type>

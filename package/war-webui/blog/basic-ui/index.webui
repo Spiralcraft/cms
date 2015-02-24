@@ -3,17 +3,22 @@
   tgns:cms="class:/spiralcraft/cms/meta/"
   tgns:blog="context://code/spiralcraft-cms/blog/components/"
   tgns:dtask="class:/spiralcraft/data/task/"
+  tgns:swa="class:/spiralcraft/webapp/meta/"
   %>
-  <%theme:activity-page activityClass="blog-index-activity"%>
-    <%With x="[cms:BlogContext].blog"%>
+  <%With x="[cms:BlogContext].blog"%>
+    <%theme:activity-page activityClass="blog-index-activity" 
+      activityTitle="{|[cms:BlogContext].blog.title{.!=null?.:[cms:BlogContext].blog.id}|}
+      "%>
       
-      <h2><%=title{.!=null?.:id}/%></h2>
       <div class="activity-actions">
-        <a href="post/new">New Entry</a>
+        <%If x="[cms:BlogContext].canPost([swa:Session].user)"%>
+          <a href="post/new" class="button">New Post</a>
+          <a href="settings" class="button">Settings</a>
+        <%/If%>
       </div>
       
       <div class="sc-cms-post-index">
-        <%With x="posts"%>
+        <%With x="rangeOfPosts(0,10)"%>
           <ul>
             <%Iterate%>
               <li>
@@ -23,6 +28,6 @@
           </ul>
         <%/With%>
       </div>
-    <%/With%>
-  <%/theme:activity-page%>
+    <%/theme:activity-page%>
+  <%/With%>
 <%/@doclet%>

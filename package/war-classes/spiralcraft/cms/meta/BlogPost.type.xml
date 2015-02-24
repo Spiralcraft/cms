@@ -51,6 +51,8 @@
       </type>
       <required>true
       </required>
+      <uniqueValue>true
+      </uniqueValue>
     </meta:Field>
 
     <meta:Field>
@@ -67,6 +69,13 @@
       </type>
     </meta:Field>
     
+    <meta:Field>
+      <name>externalId
+      </name>
+      <type><String.type/>
+      </type>
+    </meta:Field>
+
   </fields>
   
   <keys>
@@ -78,6 +87,12 @@
     </meta:Key>
     <meta:Key>
       <fieldList>blogId,slug
+      </fieldList>
+      <unique>true
+      </unique>
+    </meta:Key>
+    <meta:Key>
+      <fieldList>blogId,externalId
       </fieldList>
       <unique>true
       </unique>

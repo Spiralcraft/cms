@@ -2,11 +2,12 @@
   tgns:theme="context://theme/"
   tgns:cms="class:/spiralcraft/cms/meta/"
   tgns:blog="context://code/spiralcraft-cms/blog/components/"
+  tgns:swa="class:/spiralcraft/webapp/meta/"
   %>
   <div class="sc-cms-postSummary-panel">
     <h2 class="sc-cms-post-title"><a href="<%=slug/%>"><%=title/%></a></h2>
     <div class="sc-cms-post-dateline">
-      <%DateFormat x="publishDate" format="EEEE, MMMM d, yyyy  h:mm a"/%>
+      Posted by <%=[@swa:User].@forId(creatorId).commonName/%> on <%DateFormat x="publishDate" format="EEEE, MMMM d, yyyy  h:mm a"/%>
     </div>
     <div class="sc-cms-post-actions">
     </div>

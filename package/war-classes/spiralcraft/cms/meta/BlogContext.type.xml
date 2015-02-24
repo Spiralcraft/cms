@@ -4,6 +4,7 @@
   xmlns:cms="class:/spiralcraft/cms/meta/"
   xmlns:dt="class:/spiralcraft/data/task/"
   xmlns:j="class:/java/lang/"
+  xmlns:swa="class:/spiralcraft/webapp/meta/"
   >
   <description>A non-persistent type that provides constant-scoped components
     access to a blog
@@ -47,10 +48,38 @@
       <x>
         blog
           {.==null
-            ?[@cms:Blog].ensureBlog(blogId)
+            ?[@cms:Blog].@ensureBlog(blogId)
             :.
           }
       </x>
     </meta:TransactionMethod>
+    
+    <meta:Method>
+      <name>canPost
+      </name>
+      <parameterTypes><swa:User.type/>
+      </parameterTypes>
+      <returnType><Boolean.type/>
+      </returnType>
+      <contextX>[#p] { user:[@swa:User] }
+      </contextX>
+      <x>user.superUser
+      </x>
+    </meta:Method>
+
+    <meta:Method>
+      <name>canEdit
+      </name>
+      <parameterTypes>
+        <swa:User.type/>
+        <cms:BlogPost.type/>
+      </parameterTypes>
+      <returnType><Boolean.type/>
+      </returnType>
+      <contextX>[#p] { user:[@swa:User], blogPost:[@cms:BlogPost] }
+      </contextX>
+      <x>user!=null &amp;&amp; (user.superUser || blogPost.creatorId==user.id)
+      </x>
+    </meta:Method>
   </methods>
 </meta:Type>

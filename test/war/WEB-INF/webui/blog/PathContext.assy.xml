@@ -18,5 +18,8 @@
        ,blogId:=[cms:CatalogContext].catalogId
        ,pathInfo:=[@su:Path].([af:PathContext].pathInfo)
        )
+      { .ensureBlog()
+      , .
+      }
   </exports>
 </base:PathContext>
