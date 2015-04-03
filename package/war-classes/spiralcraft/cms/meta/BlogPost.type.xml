@@ -1,6 +1,7 @@
 <meta:Type
   xmlns:meta="class:/spiralcraft/data/types/meta/"
   xmlns:ju="class:/java/util/"
+  xmlns:cms="class:/spiralcraft/cms/meta/"
   >
   <fields>
     <meta:SequenceField>
@@ -76,6 +77,14 @@
       </type>
     </meta:Field>
 
+    <meta:RelativeField>
+      <name>comments
+      </name>
+      <type><cms:BlogComment.list.type/>
+      </type>
+      <referencedFieldList>blogPostId
+      </referencedFieldList>
+    </meta:RelativeField>
   </fields>
   
   <keys>

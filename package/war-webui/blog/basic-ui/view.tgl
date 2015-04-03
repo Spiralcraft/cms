@@ -33,6 +33,20 @@
         <div class="sc-cms-post-content">
           <%=content/%>
         </div>
+        <section class="sc-cms-comments">
+          <h3>Comments</h3>
+          <%Iterate x="comments"%>
+            <div class="sc-cms-comment">
+              <div class="byline">
+                <span class="poster"><%=[@swa:User].@forId(commenterId).commonName{.==null?"Anonymous":.}/%></span>  
+                <span class="date">  <%DateFormat x="commentDate" format="yyyy-MM-dd  h:mm a"/%></span>
+              </div>
+              <div class="content">
+                <%=content/%>
+              </div>
+            </div>
+          <%/Iterate%>
+        </section>
       </div>      
     <%/t:activity-page%>
   <%/With%>

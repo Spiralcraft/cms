@@ -62,4 +62,13 @@
       </type>
     </meta:Field>
   </fields>
+  
+  <keys>
+    <meta:Key>
+      <primary>true
+      </primary>
+      <fieldList>id
+      </fieldList>
+    </meta:Key>
+  </keys>
 </meta:Type>
