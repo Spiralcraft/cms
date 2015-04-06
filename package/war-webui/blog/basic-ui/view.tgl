@@ -38,7 +38,7 @@
           <%Iterate x="comments"%>
             <div class="sc-cms-comment">
               <div class="byline">
-                <span class="poster"><%=[@swa:User].@forId(commenterId).commonName{.==null?"Anonymous":.}/%></span>  
+                <span class="poster"><%=displayName??[@swa:User].@forId(commenterId).commonName??"Anonymous"/%></span>  
                 <span class="date">  <%DateFormat x="commentDate" format="yyyy-MM-dd  h:mm a"/%></span>
               </div>
               <div class="content">
