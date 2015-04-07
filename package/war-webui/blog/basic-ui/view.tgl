@@ -5,6 +5,7 @@
   tgns:af="class:/spiralcraft/servlet/autofilter/"
   tgns:cms="class:/spiralcraft/cms/meta/"
   tgns:swa="class:/spiralcraft/webapp/meta/"
+  tgns:fn="class:/spiralcraft/lang/functions/"
   %>
   <%With x='[cms:BlogContext].blog.postForSlug([cms:BlogContext].pathInfo.toString())'
     %>
@@ -34,18 +35,20 @@
           <%=content/%>
         </div>
         <section class="sc-cms-comments">
-          <h3>Comments</h3>
-          <%Iterate x="comments"%>
-            <div class="sc-cms-comment">
-              <div class="byline">
-                <span class="poster"><%=displayName??[@swa:User].@forId(commenterId).commonName??"Anonymous"/%></span>  
-                <span class="date">  <%DateFormat x="commentDate" format="yyyy-MM-dd  h:mm a"/%></span>
+          <%With x="comments.[*fn:Sort{ `.commentDate`, true }]"%>
+            <h3><%=.@empty?"No Comments":.@size==1?"1 Comment":(""+.@size+" Comments")/%></h3>
+            <%Iterate%>
+              <div class="sc-cms-comment">
+                <div class="byline">
+                  <span class="poster"><%=displayName??[@swa:User].@forId(commenterId).commonName??"Anonymous"/%></span>  
+                  <span class="date">  <%DateFormat x="commentDate" format="yyyy-MM-dd  h:mm a"/%></span>
+                </div>
+                <div class="content">
+                  <%=content/%>
+                </div>
               </div>
-              <div class="content">
-                <%=content/%>
-              </div>
-            </div>
-          <%/Iterate%>
+            <%/Iterate%>
+          <%/With%>
         </section>
       </div>      
     <%/t:activity-page%>
