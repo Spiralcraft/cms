@@ -81,5 +81,20 @@
       <x>user!=null &amp;&amp; (user.superUser || blogPost.creatorId==user.id)
       </x>
     </meta:Method>
+    
+    <meta:Method>
+      <name>canComment
+      </name>
+      <parameterTypes>
+        <swa:User.type/>
+        <cms:BlogPost.type/>
+      </parameterTypes>
+      <returnType><Boolean.type/>
+      </returnType>
+      <contextX>[#p] { user:[@swa:User], blogPost:[@cms:BlogPost] }
+      </contextX>
+      <x>user!=null
+      </x>
+    </meta:Method>
   </methods>
 </meta:Type>

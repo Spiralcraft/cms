@@ -25,10 +25,29 @@ div.sc-cms-post-content
   padding-bottom: 0.5em;
 }
 
+div.blog-index-activity .activity-actions
+{ margin-bottom: 0.25em;
+}
+
+div.sc-cms-post-index
+{
+  margin: 1em 0;
+}
+
 div.sc-cms-post-index > ul
 {
   list-style: none;
   padding-left: 0;
+}
+
+div.sc-cms-post-index > .top-pager
+{
+  margin-top: 6px;
+}
+
+div.sc-cms-post-index > .bottom-pager
+{
+  margin-top: 4px;
 }
 
 div.sc-cms-post-index > ul > li
@@ -41,3 +60,48 @@ div.sc-cms-post-index > ul h2.sc-cms-post-title
   margin-top: .25em;
 }
 
+/* Comments */
+
+.blog-post-activity section.sc-cms-comments 
+{
+}
+
+.blog-post-activity section.sc-cms-comments textarea
+{
+  width: 20em;
+}
+
+.blog-post-activity section.sc-cms-comments form button
+{
+  display: block;
+  
+}
+
+.blog-post-activity ul.sc-cms-comment-list
+{
+  list-style: none;
+  padding-left:0;
+  width: 20em;
+}
+
+.blog-post-activity ul.sc-cms-comment-list li
+{
+  background: #eeeeee;
+  margin: 1em 0;
+}
+
+.blog-post-activity ul.sc-cms-comment-list .byline
+{
+  font-size: 75%;
+  font-weight: bold;
+}
+
+.blog-post-activity ul.sc-cms-comment-list .byline .poster
+{
+  font-style: italic;
+}
+
+.blog-post-activity ul.sc-cms-comment-list .content
+{
+  margin: 0.25em;
+}
