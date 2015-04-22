@@ -19,7 +19,10 @@
       </div>
       
       <div class="sc-cms-post-index">
-        <%c:Paginate x="posts" pageSize="10"%>
+        <%c:Paginate x="rangeOfPosts(0,10000)" pageSize="5"%>
+          <div class="pager top-pager">
+            <%c:pagination-control/%>
+          </div>
           <ul>
             <%Iterate%>
               <li>
@@ -27,6 +30,9 @@
               </li>
             <%/Iterate%>
           </ul>
+          <div class="pager bottom-pager">
+            <%c:pagination-control/%>
+          </div>
         <%/c:Paginate%>
       </div>
     <%/theme:activity-page%>
