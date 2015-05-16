@@ -1,5 +1,6 @@
 <app:PluginContext
   xmlns:app="class:/spiralcraft/app/"
+  xmlns:vfsc="class:/spiralcraft/vfs/context/"
   >
   <pluginId>spiralcraft-cms
   </pluginId>
@@ -7,5 +8,8 @@
   <stores>
     <Store/>
   </stores>
+
+  <fileContainers>images
+  </fileContainers>
 
 </app:PluginContext>

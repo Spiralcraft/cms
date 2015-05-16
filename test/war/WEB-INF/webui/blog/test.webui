@@ -1,0 +1,8 @@
+<%@doclet
+  tgns:jnet="class:/java/net/"
+  tgns:vfsf="class:/spiralcraft/vfs/functions/"
+  %>
+This is a test
+
+<%=[*jnet:URI{"context://place.spiralcraft-cms.images/"}].[*vfsf:Resolve]/%>
+<%/@doclet%>

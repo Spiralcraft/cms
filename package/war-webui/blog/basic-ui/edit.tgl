@@ -9,26 +9,72 @@
   tgns:af="class:/spiralcraft/servlet/autofilter/"
   tgns:su="class:/spiralcraft/util/"
   tgns:swa="class:/spiralcraft/webapp/meta/"
+  tgns:jnet="class:/java/net"
   %>    
   
   <%t:activity-page%>
     <%h:Script src="/js/moxiecode-tinymce/tinymce.min.js" target="HEAD"/%>
-    <%h:Script target="HEAD"
-      code='
+    <%h:Script target="HEAD"%>
         tinymce.init({
           selector: "textarea.richtext",
-          plugins: "link code",
+          plugins: "link code image",
+          image_list: [
+            {title: "Dog", value: "/uploaded-images/mydog.jpg"},
+            {title: "Cat", value: "/uploaded-images/mycat.gif"}
+          ],
           forced_root_block: false,
-          toolbar: "undo redo | bold italic underline | bullist numlist link unlink | code ",
+          toolbar: "undo redo | bold italic underline | bullist numlist link unlink image | code ",
           menubar: false,
           statusbar: false,
           resize: false,
           invalid_elements: "span",
-          extended_valid_elements : "br[style:]"
+          extended_valid_elements : "br[style:]",
+          relative_urls: false,
+          remove_script_host: true,
+          document_base_url : "<%=[cms:BlogContext].baseURI/%>/",
+          file_picker_callback: function(callback, value, meta) {
+            if(meta.filetype=="image") {
+              $SC("upload-input").callback=callback;
+              $SC("upload-input").element().click();
+            }
+          }          
         });
-      '
-    /%>  
+        
+    <%/h:Script%> 
     <%h:Stylesheet href="{|[c:page].cssURI|}/spiralcraft-cms/blog.css"/%>  
+    
+    <%h:Div%>
+      <%h:Script%>
+        (function() {
+          var c=<%=[h:Div].JSRef/%>;
+          c.doUpload = function(file,callback) {
+            c.file=file;
+            formData=new FormData();
+            formData.append("file",file);
+            SPIRALCRAFT.ajax.postForm($SC("upload-form").element().action,c.callback,formData);
+            
+          };
+          
+          c.callback = function() {
+            $SC('upload-input').callback('/cms/img/'+c.file.name);
+          };
+        })();
+      <%/h:Script%>
+      <%h:JSPort id="upload" isolatePort="false" debug="true"%>
+        <%h:Form tag.id="upload-form" tag.style="display: none;" debug="true"%>
+          <%h:FileInput 
+            tag.id="upload-input" 
+            name="file"
+            contextualizeName="false"
+            x='[@jnet:URI].@nil.@log("upload="+.)'
+            contextRelativeRoot="/cms/img/"
+            debug="true"
+            tag.onchange="{|[h:Div].JSRef|}.doUpload(files[0]);"
+          /%>
+        <%/h:Form%>
+      <%/h:JSPort%>
+    <%/h:Div%>
+    
     <%With x='{ id:=[cms:BlogContext].pathInfo.lastElement()
                ,new:=.id=="new"
                ,post:=!.new?[cms:BlogContext].blog.postForId(.id):null

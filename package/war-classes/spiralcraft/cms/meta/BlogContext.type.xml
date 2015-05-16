@@ -37,6 +37,15 @@
       <type><Path.type/>
       </type>
     </meta:Field>
+    <meta:Field>
+      <name>baseURI
+      </name>
+      <description>The root URI for all links to local site content from within
+        the blog.
+      </description>
+      <type><URI.type/>
+      </type>
+    </meta:Field>
   </fields>
   
   <methods>

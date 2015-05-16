@@ -1,0 +1,13 @@
+<af:PathContext
+  xmlns:base="context://package-base/"
+  xmlns:cms="class:/spiralcraft/cms/meta/"
+  xmlns:af="class:/spiralcraft/servlet/autofilter/"
+  xmlns:su="class:/spiralcraft/util/"
+  xmlns:jnet="class:/java/net/"
+  >
+
+  <onEnter>@log("-> cms "+.pathInfo)
+  </onEnter>
+  <onExit>@log("&lt;- cms "+.pathInfo)
+  </onExit>
+</af:PathContext>

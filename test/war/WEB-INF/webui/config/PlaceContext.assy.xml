@@ -1,8 +1,28 @@
 <base:PlaceContext
   xmlns:base="context://package-base/config/"
   xmlns:cms="context://code/spiralcraft-cms/config/"
+  xmlns:vfsc="class:/spiralcraft/vfs/context/"
   >
   <plugins>
     <cms:Plugin/>
   </plugins>
+  
+  <exportMounts>
+    <vfsc:Authority>
+      <authorityName>
+      </authorityName>
+     
+      <debugLevel>INFO
+      </debugLevel>
+      
+      <grafts>
+        <vfsc:Redirect>
+          <virtualURI>cms/img/
+          </virtualURI>
+          <newBaseURI>context://place.spiralcraft-cms.images/
+          </newBaseURI>
+        </vfsc:Redirect>
+      </grafts>
+    </vfsc:Authority>  
+  </exportMounts>
 </base:PlaceContext>
