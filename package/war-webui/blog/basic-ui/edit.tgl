@@ -60,15 +60,15 @@
           };
         })();
       <%/h:Script%>
-      <%h:JSPort id="upload" isolatePort="false" debug="true"%>
-        <%h:Form tag.id="upload-form" tag.style="display: none;" debug="true"%>
+      <%h:JSPort id="upload" isolatePort="false"%>
+        <%h:Form tag.id="upload-form" tag.style="display: none;"%>
           <%h:FileInput 
             tag.id="upload-input" 
             name="file"
             contextualizeName="false"
             x='[@jnet:URI].@nil.@log("upload="+.)'
             contextRelativeRoot="/cms/img/"
-            debug="true"
+            overwrite="true"
             tag.onchange="{|[h:Div].JSRef|}.doUpload(files[0]);"
           /%>
         <%/h:Form%>
