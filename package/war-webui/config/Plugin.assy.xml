@@ -12,4 +12,12 @@
   <fileContainers>images
   </fileContainers>
 
+  <publishedGrafts>
+    <vfsc:Redirect>
+      <virtualURI>cms/img/
+      </virtualURI>
+      <newBaseURI>context://place.spiralcraft-cms.images/
+      </newBaseURI>
+    </vfsc:Redirect>
+  </publishedGrafts>
 </app:PluginContext>
