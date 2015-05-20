@@ -5,36 +5,44 @@
   tgns:dtask="class:/spiralcraft/data/task/"
   tgns:swa="class:/spiralcraft/webapp/meta/"
   tgns:c="context://code/components/"
+  tgns:h="context://code/components/html/"
   %>
-  <%With x="[cms:BlogContext].blog"%>
-    <%theme:activity-page activityClass="blog-index-activity" 
-      activityTitle="{|[cms:BlogContext].blog.title{.!=null?.:[cms:BlogContext].blog.id}|}
-      "%>
-      
-      <div class="activity-actions">
-        <%If x="[cms:BlogContext].canPost([swa:Session].user)"%>
-          <a href="post/new" class="button">New Post</a>
-          <a href="settings" class="button">Settings</a>
-        <%/If%>
-      </div>
-      
-      <div class="sc-cms-post-index">
-        <%c:Paginate x="rangeOfPosts(0,10000)" pageSize="5"%>
-          <div class="pager top-pager">
-            <%c:pagination-control/%>
-          </div>
-          <ul>
-            <%Iterate%>
-              <li>
-              <%blog:postSummary-panel/%>
-              </li>
-            <%/Iterate%>
-          </ul>
-          <div class="pager bottom-pager">
-            <%c:pagination-control/%>
-          </div>
-        <%/c:Paginate%>
-      </div>
-    <%/theme:activity-page%>
-  <%/With%>
+  <%c:Session x="[#s] { showDrafts:=false }"%>
+    <%With x="[cms:BlogContext].blog"%>
+      <%theme:activity-page activityClass="blog-index-activity" 
+        activityTitle="{|[cms:BlogContext].blog.title{.!=null?.:[cms:BlogContext].blog.id}|}
+        "%>
+        
+        <div class="activity-actions">
+          <%If x="[cms:BlogContext].canPost([swa:Session].user)"%>
+            <a href="post/new" class="button">New Post</a>
+            <a href="settings" class="button">Settings</a>
+            <%If x="[s].showDrafts"%>
+              <%h:Link tag.clazz="button" onAction="[s].showDrafts=false"%>Hide Drafts<%/h:Link%>
+            <%Else/%>
+              <%h:Link tag.clazz="button" onAction="[s].showDrafts=true"%>Show Drafts<%/h:Link%>
+            <%/If%>
+          <%/If%>
+        </div>
+        
+        <div class="sc-cms-post-index">
+          <%c:Paginate x="rangeOfPosts(0,10000)[ [s].showDrafts?true:.published ]" pageSize="5"%>
+            <div class="pager top-pager">
+              <%c:pagination-control/%>
+            </div>
+            <ul>
+              <%Iterate%>
+                <li>
+                <%blog:postSummary-panel/%>
+                </li>
+              <%/Iterate%>
+            </ul>
+            <div class="pager bottom-pager">
+              <%c:pagination-control/%>
+            </div>
+          <%/c:Paginate%>
+        </div>
+      <%/theme:activity-page%>
+    <%/With%>
+  <%/c:Session%>
 <%/@doclet%>

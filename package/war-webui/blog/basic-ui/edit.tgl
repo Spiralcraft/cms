@@ -12,6 +12,7 @@
   tgns:jnet="class:/java/net"
   tgns:vfsf="class:/spiralcraft/vfs/functions/"
   tgns:json="class:/spiralcraft/json/"
+  tgns:ju="class:/java/util/"
   %>    
   
   <%t:activity-page%>
@@ -137,6 +138,11 @@
             <div class="sc-form-button-bar">
               <%h:Button onAction="[h:Form].save()"%>Save<%/h:Button%>
               <%h:Button onAction='[h:Form].revert()'%>Cancel<%/h:Button%>
+              <%If x=".published"%>
+                <%h:Button onAction='@{ .published=false,[h:Form].save()}' tag.clazz="right"%>Unpublish<%/h:Button%>
+              <%Else/%>
+                <%h:Button onAction='@{ .published=true, .publishDate=[@ju:Date].(), [h:Form].save()}' tag.clazz="right"%>Publish<%/h:Button%>
+              <%/If%>
               <%h:Button onAction='@{ @tuple.delete(),[h:Form].save()}' tag.clazz="right"%>Delete<%/h:Button%>
             </div>
           <%/h:TupleEditor%>

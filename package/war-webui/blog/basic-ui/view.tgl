@@ -25,7 +25,7 @@
       </div>
       
       <div class="sc-cms-post-panel">
-        <h2 class="sc-cms-post-title"><%=title/%></h2>
+        <h2 class="sc-cms-post-title"><%=title/%><%If x="!published"%>  (DRAFT)<%/If%></h2>
         <div class="sc-cms-post-dateline">
           Posted by <%=[@swa:User].@forId(creatorId).commonName/%> on <%DateFormat x="publishDate" format="EEEE, MMMM d, yyyy  h:mm a"/%>
         </div>

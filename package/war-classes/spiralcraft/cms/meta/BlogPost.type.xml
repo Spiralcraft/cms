@@ -30,6 +30,15 @@
     </meta:Field>
     
     <meta:Field>
+      <name>published
+      </name>
+      <type><Boolean.type/>
+      </type>
+      <description>Non-published posts are stored as drafts
+      </description>
+    </meta:Field>
+    
+    <meta:Field>
       <name>publishDate
       </name>
       <type><Date.type/>

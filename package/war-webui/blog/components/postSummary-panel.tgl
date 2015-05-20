@@ -5,7 +5,7 @@
   tgns:swa="class:/spiralcraft/webapp/meta/"
   %>
   <div class="sc-cms-postSummary-panel">
-    <h2 class="sc-cms-post-title"><a href="<%=slug/%>"><%=title/%></a></h2>
+    <h2 class="sc-cms-post-title"><a href="<%=slug/%>"><%=title/%></a><%If x="!published"%>  (DRAFT)<%/If%></h2>
     <div class="sc-cms-post-dateline">
       Posted by <%=[@swa:User].@forId(creatorId).commonName/%> on <%DateFormat x="publishDate" format="EEEE, MMMM d, yyyy  h:mm a"/%>
     </div>
