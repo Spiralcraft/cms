@@ -13,14 +13,15 @@
         plugins: "link code image",
         image_list: function(success) { getImages(success); },
         forced_root_block: false,
-        toolbar: "undo redo | bold italic underline | imgleft imgcenter imgright | bullist numlist link unlink image | code ",
+        toolbar: ["undo redo | bold italic underline |  bullist numlist link unlink image | code ",
+                  "imgleft imgcenter imgright"
+                 ],
         formats: {
              imgleft: {
                 title: 'Image Left',
                 selector: 'img',
                 attributes: { align: "left" },
                 styles: {
-                    'float': 'left', 
                     'margin': '0 0.5em',
                     'display': 'block'
                     
@@ -31,7 +32,6 @@
                 selector: 'img',
                 attributes: { align: "middle" },
                 styles: {
-                    'float': 'none', 
                     'margin': '0 auto',
                     'display': 'block'
                 }
@@ -41,39 +41,12 @@
                  selector: 'img', 
                  attributes: { align: "right" },
                  styles: {
-                     'float': 'right', 
                      'margin': '0 0.5em',
                     'display': 'block'
                      
                  }
              }            
            },
-        style_formats: [
-             {
-                title: 'Image Left',
-                selector: 'img',
-                styles: {
-                    'float': 'left', 
-                    'margin': '0 0.5em'
-                }
-             },
-             {
-                title: 'Image Center',
-                selector: 'img',
-                styles: {
-                    'float': 'none', 
-                    'margin': '0 auto'
-                }
-             },
-             {
-                 title: 'Image Right',
-                 selector: 'img', 
-                 styles: {
-                     'float': 'right', 
-                     'margin': '0 0.5em'
-                 }
-             }            
-           ],
         menubar: false,
         statusbar: false,
         resize: false,
