@@ -23,6 +23,7 @@ div.sc-cms-post-content
 {
   margin-top: 1em;
   padding-bottom: 0.5em;
+  overflow: auto;
 }
 
 div.blog-index-activity .activity-actions

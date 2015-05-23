@@ -12,7 +12,8 @@
       <%theme:activity-page activityClass="blog-index-activity" 
         activityTitle="{|[cms:BlogContext].blog.title{.!=null?.:[cms:BlogContext].blog.id}|}
         "%>
-        
+        <%h:Stylesheet href="{|[c:page].cssURI|}/spiralcraft-cms/blog.css"/%>  
+
         <div class="activity-actions">
           <%If x="[cms:BlogContext].canPost([swa:Session].user)"%>
             <a href="post/new" class="button">New Post</a>
