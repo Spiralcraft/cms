@@ -16,6 +16,14 @@
   %>    
   
   <%t:activity-page%>
+   <script type="text/javascript">
+     SPIRALCRAFT.dom.registerBodyOnLoad(
+       function(){
+         SPIRALCRAFT.webui.sessionSync(true);
+       }     
+     );
+  
+  </script>
     <%blog:tinymce/%>
     <%h:Stylesheet href="{|[c:page].cssURI|}/spiralcraft-cms/blog.css"/%>  
 
