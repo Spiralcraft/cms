@@ -55,6 +55,7 @@
         relative_urls: false,
         remove_script_host: true,
         document_base_url : "<%=[cms:BlogContext].baseURI/%>/",
+        content_css : "/css/spiralcraft-cms/tinymce.css",
         setup: function(editor) {
           editor.addButton('imgleft', {
             text: 'Image Left',
