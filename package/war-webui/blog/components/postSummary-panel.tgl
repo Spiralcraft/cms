@@ -3,9 +3,10 @@
   tgns:cms="class:/spiralcraft/cms/meta/"
   tgns:blog="context://code/spiralcraft-cms/blog/components/"
   tgns:swa="class:/spiralcraft/webapp/meta/"
+  contextX='{ pageX:=`null` }'
   %>
   <div class="sc-cms-postSummary-panel">
-    <h2 class="sc-cms-post-title"><a href="<%=slug/%>"><%=title/%></a><%If x="!published"%>  (DRAFT)<%/If%></h2>
+    <h2 class="sc-cms-post-title"><a name='<%=slug/%>' href='<%=slug/%><%=[blog:postSummary-panel].pageX.(){ .!=null?"?pp="+.:""}/%>'><%=title/%></a><%If x="!published"%>  (DRAFT)<%/If%></h2>
     <div class="sc-cms-post-dateline">
       Posted by <%=[@swa:User].@forId(creatorId).commonName/%> on <%DateFormat x="publishDate" format="EEEE, MMMM d, yyyy  h:mm a"/%>
     </div>

@@ -6,73 +6,77 @@
   tgns:cms="class:/spiralcraft/cms/meta/"
   tgns:swa="class:/spiralcraft/webapp/meta/"
   tgns:fn="class:/spiralcraft/lang/functions/"
+  tgns:j="class:/java/lang/"
   %>
-  <%With x='[cms:BlogContext].blog.postForSlug([cms:BlogContext].pathInfo.toString())'
-    %>
-    <%If x=".==null"%>
-      <%c:Redirect locationX="[cms:BlogContext].blogPath"/%>
-    <%/If%>
-    <%t:activity-page activityClass="blog-post-activity" 
-      activityTitle="{|[cms:BlogContext].blog.title|} - {|[cms:BlogPost].title|}"
-      displayTitle="false"
+  <%c:RequestData x="[#request] { pp:[@j:Integer] }"%>
+  
+    <%With x='[cms:BlogContext].blog.postForSlug([cms:BlogContext].pathInfo.toString())'
       %>
-      <%h:Stylesheet href="{|[c:page].cssURI|}/spiralcraft-cms/blog.css" /%>
-      <div class="sc-cms-post-actions sc-action-button-bar">
-        <a href="<%=[cms:BlogContext].blogPath/%>" class="button">Return to blog</a>
-        <%If x="[cms:BlogContext].canEdit([swa:Session].user,.)"%>
-          <a href='<%=[cms:BlogContext].blogPath+"post/"+.id/%>' class="button">Edit this post</a>
-        <%/If%>
-      </div>
-      
-      <div class="sc-cms-post-panel">
-        <h2 class="sc-cms-post-title"><%=title/%><%If x="!published"%>  (DRAFT)<%/If%></h2>
-        <div class="sc-cms-post-dateline">
-          Posted by <%=[@swa:User].@forId(creatorId).commonName/%> on <%DateFormat x="publishDate" format="EEEE, MMMM d, yyyy  h:mm a"/%>
-        </div>
+      <%If x=".==null"%>
+        <%c:Redirect locationX="[cms:BlogContext].blogPath"/%>
+      <%/If%>
+      <%t:activity-page activityClass="blog-post-activity" 
+        activityTitle="{|[cms:BlogContext].blog.title|} - {|[cms:BlogPost].title|}"
+        displayTitle="false"
+        %>
+        <%h:Stylesheet href="{|[c:page].cssURI|}/spiralcraft-cms/blog.css" /%>
         <div class="sc-cms-post-actions sc-action-button-bar">
+          <a href='<%=[cms:BlogContext].blogPath/%><%=[request].pp{ .!=null?"?pp="+.:""}/%>#<%=.slug/%>' class="button">Return to blog</a>
+          <%If x="[cms:BlogContext].canEdit([swa:Session].user,.)"%>
+            <a href='<%=[cms:BlogContext].blogPath+"post/"+.id/%>' class="button">Edit this post</a>
+          <%/If%>
         </div>
-        <div class="sc-cms-post-content">
-          <%=content/%>
-        </div>
-        <section class="sc-cms-comments">
-          <%With x="comments.[*fn:Sort{ `.commentDate`, true }]"%>
-            <h3><%=.@empty?"No Comments":.@size==1?"1 Comment":(""+.@size+" Comments")/%></h3>
-            <%If x="[cms:BlogContext].canComment([swa:Session].user,[cms:BlogPost])"%>
-              <div class="sc-cms-comment edit">
-                <%h:Form%>
-                  <%h:TupleEditor 
-                    typeX="[@cms:BlogComment].type"
-                    autoCreate="true"
-                    preSave="@{ blogId=[cms:BlogPost].blogId
-                                ,blogPostId=[cms:BlogPost].id
-                                ,commenterId=[swa:Session].user.id
-                              }
-                            "
-                    %>
-                    <%h:TextArea x="content"/%>
-                    <%h:Button onAction="[h:Form].save()"%>Post Comment<%/h:Button%>
-                  <%/h:TupleEditor%>
-                <%/h:Form%>
-              </div>
-            <%/If%>
-            <ul class="sc-cms-comment-list">
-              <%Iterate%>
-                <li>
-                  <div class="sc-cms-comment">
-                    <div class="byline">
-                      <span class="poster"><%=displayName??[@swa:User].@forId(commenterId).commonName??"Anonymous"/%></span>  
-                      <span class="date">  <%DateFormat x="commentDate" format="yyyy-MM-dd  h:mm a"/%></span>
+        
+        <div class="sc-cms-post-panel">
+          <h2 class="sc-cms-post-title"><%=title/%><%If x="!published"%>  (DRAFT)<%/If%></h2>
+          <div class="sc-cms-post-dateline">
+            Posted by <%=[@swa:User].@forId(creatorId).commonName/%> on <%DateFormat x="publishDate" format="EEEE, MMMM d, yyyy  h:mm a"/%>
+          </div>
+          <div class="sc-cms-post-actions sc-action-button-bar">
+          </div>
+          <div class="sc-cms-post-content">
+            <%=content/%>
+          </div>
+          <section class="sc-cms-comments">
+            <%With x="comments.[*fn:Sort{ `.commentDate`, true }]"%>
+              <h3><%=.@empty?"No Comments":.@size==1?"1 Comment":(""+.@size+" Comments")/%></h3>
+              <%If x="[cms:BlogContext].canComment([swa:Session].user,[cms:BlogPost])"%>
+                <div class="sc-cms-comment edit">
+                  <%h:Form%>
+                    <%h:TupleEditor 
+                      typeX="[@cms:BlogComment].type"
+                      autoCreate="true"
+                      preSave="@{ blogId=[cms:BlogPost].blogId
+                                  ,blogPostId=[cms:BlogPost].id
+                                  ,commenterId=[swa:Session].user.id
+                                }
+                              "
+                      %>
+                      <%h:TextArea x="content"/%>
+                      <%h:Button onAction="[h:Form].save()"%>Post Comment<%/h:Button%>
+                    <%/h:TupleEditor%>
+                  <%/h:Form%>
+                </div>
+              <%/If%>
+              <ul class="sc-cms-comment-list">
+                <%Iterate%>
+                  <li>
+                    <div class="sc-cms-comment">
+                      <div class="byline">
+                        <span class="poster"><%=displayName??[@swa:User].@forId(commenterId).commonName??"Anonymous"/%></span>  
+                        <span class="date">  <%DateFormat x="commentDate" format="yyyy-MM-dd  h:mm a"/%></span>
+                      </div>
+                      <div class="content">
+                        <%=content/%>
+                      </div>
                     </div>
-                    <div class="content">
-                      <%=content/%>
-                    </div>
-                  </div>
-                </li>
-              <%/Iterate%>
-            </ul>
-          <%/With%>
-        </section>
-      </div>      
-    <%/t:activity-page%>
-  <%/With%>
+                  </li>
+                <%/Iterate%>
+              </ul>
+            <%/With%>
+          </section>
+        </div>      
+      <%/t:activity-page%>
+    <%/With%>
+  <%/c:RequestData%>
 <%/@doclet%>
