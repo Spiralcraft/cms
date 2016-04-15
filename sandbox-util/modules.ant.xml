@@ -24,6 +24,6 @@
 
   <repo-inst org="kelvinluck" module="jscrollpane" rev="2.0.17"/>
   <repo-inst org="jquery" module="core" rev="1.8.3"/>
-  <repo-inst org="moxiecode" module="tinymce" rev="[4.0.1,5.0["/>
+  <repo-inst org="moxiecode" module="tinymce" rev="[4.1.10,5.0["/>
   
 </project>

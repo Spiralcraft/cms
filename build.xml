@@ -2,9 +2,9 @@
 
   <property name="organization" value="spiralcraft"/>
   <property name="module" value="cms"/>
-  <property name="buildVersion" value="0.4.17-dev1"/>
-  <property name="build.status" value="milestone"/>
   <property name="depends.dir" location="../../repo"/>
+  <property file="version.properties"/>
+  
   <import file="../../build/build-common.xml"/>
   
   <target name="launch" description="Launch test server">
