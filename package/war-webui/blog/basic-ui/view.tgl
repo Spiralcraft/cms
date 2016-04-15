@@ -23,7 +23,7 @@
         <div class="sc-cms-post-actions sc-action-button-bar">
           <a href='<%=[cms:BlogContext].blogPath/%><%=[request].pp{ .!=null?"?pp="+.:""}/%>#<%=.slug/%>' class="button">Return to blog</a>
           <%If x="[cms:BlogContext].canEdit([swa:Session].user,.)"%>
-            <a href='<%=[cms:BlogContext].blogPath+"post/"+.id/%>' class="button">Edit this post</a>
+            <a href='<%=[cms:BlogContext].blogPath+"post/"+.id+[request].pp{ .!=null?"?pp="+.:""}/%>' class="button">Edit this post</a>
           <%/If%>
         </div>
         
