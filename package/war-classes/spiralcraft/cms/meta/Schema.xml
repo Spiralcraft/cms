@@ -19,5 +19,17 @@
       <type><cms:BlogPost.type/>
       </type>
     </meta:Entity>
+    <meta:Entity>
+      <type><cms:MediaCollection.type/>
+      </type>
+    </meta:Entity>
+    <meta:Entity>
+      <type><cms:MediaItem.type/>
+      </type>
+    </meta:Entity>
+    <meta:Entity>
+      <type><cms:MediaComment.type/>
+      </type>
+    </meta:Entity>
   </entities>
 </meta:Schema>

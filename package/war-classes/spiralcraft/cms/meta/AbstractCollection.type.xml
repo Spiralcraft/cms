@@ -1,0 +1,306 @@
+<meta:Type
+  xmlns:meta="class:/spiralcraft/data/types/meta/"
+  xmlns:ju="class:/java/util/"
+  xmlns:cms="class:/spiralcraft/cms/meta/"
+  xmlns:dt="class:/spiralcraft/data/task/"
+  xmlns:j="class:/java/lang/"
+  xmlns:us="class:/spiralcraft/util/string/"
+  xmlns:fn="class:/spiralcraft/lang/functions/"
+  >
+  <abstract>true
+  </abstract>
+  <parameters>
+    <meta:TypeParameter>
+      <name>itemType
+      </name>
+    </meta:TypeParameter>
+    <meta:TypeParameter>
+      <name>commentType
+      </name>
+    </meta:TypeParameter>
+  </parameters>
+    
+  <fields>
+    <meta:SequenceField>
+      <name>id
+      </name>
+      <type><String.type/>
+      </type>
+    </meta:SequenceField>
+    
+    <meta:Field>
+      <name>code
+      </name>
+      <type><String.type/>
+      </type>
+      <uniqueValue>true
+      </uniqueValue>
+    </meta:Field>
+
+    <meta:Field>
+      <name>creatorId
+      </name>
+      <description>The id of the User who created this collection
+      </description>
+      <type><String.type/>
+      </type>
+    </meta:Field>
+    
+    <meta:Field>
+      <name>createdDate
+      </name>
+      <type><Date.type/>
+      </type>
+      <defaultExpression>[@ju:Date].()
+      </defaultExpression>
+    </meta:Field>
+    
+    <meta:Field>
+      <name>title
+      </name>
+      <type><String.type/>
+      </type>
+    </meta:Field>
+
+    <meta:RelativeField>
+      <name>items
+      </name>
+      <typeX>itemType.aggregateType
+      </typeX>
+      <template>true
+      </template>
+      <referencedFieldList>collectionId
+      </referencedFieldList>
+    </meta:RelativeField>  
+  </fields>
+  <keys>
+    <meta:Key>
+      <primary>true
+      </primary>
+      <fieldList>id
+      </fieldList>
+    </meta:Key>
+  </keys>
+  <methods>
+    <meta:Method>
+      <name>forId
+      </name>
+    
+      <static>true
+      </static>
+      
+      <parameterTypes>
+        <String.type/>
+      </parameterTypes>
+      
+      <returnTypeX>[meta:Type]
+      </returnTypeX>
+      
+      <contextX>
+        [#p] { id:[@j:String] }
+      </contextX>
+      
+      <x>[*dt:Fetch{[meta:Type],[{ `id:=[p].id` }]}].()
+      </x>
+      
+    </meta:Method>
+    <meta:Method>
+      <name>forCode
+      </name>
+    
+      <static>true
+      </static>
+      
+      <parameterTypes>
+        <String.type/>
+      </parameterTypes>
+      
+      <returnTypeX>[meta:Type]
+      </returnTypeX>
+      
+      <contextX>
+        [#p] { code:[@j:String] }
+      </contextX>
+      
+      <x>[*dt:Fetch{[meta:Type],[{ `code:=[p].code` }]}].()
+      </x>
+      
+    </meta:Method>
+    <meta:TransactionMethod>
+      <name>ensureCollection
+      </name>
+      <parameterTypes>
+        <String.type/>
+      </parameterTypes>
+      <returnTypeX>[meta:Type]
+      </returnTypeX>
+      <static>true
+      </static>
+      <contextX>
+        [#p] { code:[@j:String] }
+      </contextX>
+      <x>
+        [meta:Type].@@forCode([p].code)
+          {.==null
+            ?.[*dt:Edit
+                { autoCreate:=true
+                , forceSave:=true
+                , preSave:=`.code=[p].code`
+                }
+              ].()
+            :.
+          }
+      </x>
+    </meta:TransactionMethod>    
+    <meta:Method>
+      <name>itemForSlug
+      </name>
+      
+      <parameterTypes>
+        <String.type/>
+      </parameterTypes>
+      
+      <returnTypeX>[meta:Type].itemType
+      </returnTypeX>
+      
+      <generic>true
+      </generic>
+      
+      <contextX>
+        [#p] { slug:[@j:String] }
+      </contextX>
+      
+      <x>[*dt:Fetch{[meta:Type].itemType,[{ `collectionId:=[cms:AbstractCollection].id`,`slug:=[p].slug` }]}].()
+      </x>
+      
+    </meta:Method>    
+    <meta:Method>
+      <name>itemForId
+      </name>
+      
+      <parameterTypes>
+        <String.type/>
+      </parameterTypes>
+      
+      <returnTypeX>[meta:Type].itemType
+      </returnTypeX>
+      
+      <generic>true
+      </generic>
+
+      <contextX>
+        [#p] { id:[@j:String] }
+      </contextX>
+      
+      <x>
+        [*dt:Fetch{[meta:Type].itemType,[{ `id:=[p].id` }]}].()
+          { .collectionId==[cms:AbstractCollection].id
+            ?.
+            :null
+          }
+      </x>
+      
+    </meta:Method>  
+    <meta:Method>
+      <name>itemForExternalId
+      </name>
+      
+      <parameterTypes>
+        <String.type/>
+      </parameterTypes>
+      
+      <returnTypeX>[meta:Type].itemType
+      </returnTypeX>
+      
+      <generic>true
+      </generic>
+
+      <contextX>
+        [#p] { id:[@j:String] }
+      </contextX>
+      
+      <x>
+        [*dt:Fetch
+          {[meta:Type].itemType
+          ,[{ `collectionIdId:=[cms:AbstractCollection].id`,`externalId:=[p].id` }]
+          }
+        ].()
+      </x>
+      
+    </meta:Method>  
+    <meta:Method>
+      <name>commentForExternalId
+      </name>
+      
+      <parameterTypes>
+        <String.type/>
+      </parameterTypes>
+      
+      <returnTypeX>[meta:Type].commentType
+      </returnTypeX>
+      
+      <generic>true
+      </generic>
+
+      <contextX>
+        [#p] { id:[@j:String] }
+      </contextX>
+      
+      <x>
+        [*dt:Fetch
+          {[meta:Type].commentType
+          ,[{ `collectionId:=[cms:AbstractCollection].id`,`externalId:=[p].id` }]
+          }
+        ].()
+      </x>
+      
+    </meta:Method>  
+    <meta:Method>
+      <name>makeSlug
+      </name>
+      <parameterTypes>
+        <cms:AbstractCollectionItem.type/>
+      </parameterTypes>
+      <returnType><String.type/>
+      </returnType>
+      <contextX>
+        [#p] { post:[@cms:AbstractCollectionItem] }
+      </contextX>
+      <x>
+        post.publishDate
+          {.==null?[@ju:Date].():.}
+          .[*fn:ToString{ [*us:DateToString{"yyyy/MM/dd/" }] }]
+          +post.title.toCharArray()
+            #{ (.&gt;='0' &amp;&amp; .&lt;='9')
+               || (.&gt;='A' &amp;&amp; .&lt;='Z')
+               || (.&gt;='a' &amp;&amp; .&lt;='z')
+               ?.
+               :(.==' ' || .=='-' || .=='_')
+               ?'-'
+               :null
+            }
+            [.!=null]
+            { [@j:String].(.).toLowerCase()
+            }
+      </x>
+    </meta:Method>  
+    <meta:Method>
+      <name>rangeOfItems
+      </name>
+      <parameterTypes>
+        <Integer.type/>
+        <Integer.type/>
+      </parameterTypes>
+      <returnTypeX>[meta:Type].itemType.aggregateType
+      </returnTypeX>
+      <generic>true
+      </generic>
+      <contextX>
+        [#p] { offset:[@j:Integer], size:[@j:Integer] }
+      </contextX>
+      <x>
+        [cms:AbstractCollection].items.[*fn:Sort{`.publishDate`,true}][offset..(offset+size)]
+      </x>
+    </meta:Method>    
+  </methods>
+</meta:Type>

@@ -1,0 +1,129 @@
+<meta:Type
+  xmlns:meta="class:/spiralcraft/data/types/meta/"
+  xmlns:ju="class:/java/util/"
+  xmlns:cms="class:/spiralcraft/cms/meta/"
+  >
+  <abstract>true
+  </abstract>
+  <parameters>
+    <meta:TypeParameter>
+      <name>collectionType
+      </name>
+    </meta:TypeParameter>
+    <meta:TypeParameter>
+      <name>commentType
+      </name>
+    </meta:TypeParameter>
+  </parameters>  
+  
+  <fields>
+    <meta:SequenceField>
+      <name>id
+      </name>
+      <type><LSID.type/>
+      </type>
+    </meta:SequenceField>
+
+    <meta:Field>
+      <name>collectionId
+      </name>
+      <description>The collection in which this item is published
+      </description>
+      <type><String.type/>
+      </type>
+    </meta:Field>
+    
+    <meta:Field>
+      <name>creatorId
+      </name>
+      <description>The id of the User who created this item
+      </description>
+      <type><String.type/>
+      </type>
+    </meta:Field>
+    
+    <meta:Field>
+      <name>published
+      </name>
+      <type><Boolean.type/>
+      </type>
+      <description>Non-published items are stored as drafts
+      </description>
+    </meta:Field>
+    
+    <meta:Field>
+      <name>publishDate
+      </name>
+      <type><Date.type/>
+      </type>
+      <defaultExpression>[@ju:Date].()
+      </defaultExpression>
+    </meta:Field>
+
+    <meta:Field>
+      <name>title
+      </name>
+      <type><String.type/>
+      </type>
+    </meta:Field>
+    
+    <meta:Field>
+      <name>slug
+      </name>
+      <type><String.type/>
+      </type>
+      <required>true
+      </required>
+      <uniqueValue>true
+      </uniqueValue>
+      <template>true
+      </template>
+    </meta:Field>
+
+    <meta:Field>
+      <name>contentType
+      </name>
+      <type><String.type/>
+      </type>
+    </meta:Field>
+    
+    <meta:Field>
+      <name>externalId
+      </name>
+      <type><String.type/>
+      </type>
+    </meta:Field>
+
+    <meta:RelativeField>
+      <name>comments
+      </name>
+      <template>true
+      </template>
+      <typeX>commentType.aggregateType
+      </typeX>
+      <referencedFieldList>itemId
+      </referencedFieldList>
+    </meta:RelativeField>
+  </fields>
+  
+  <keys>
+    <meta:Key>
+      <fieldList>id
+      </fieldList>
+      <primary>true
+      </primary>
+    </meta:Key>
+    <meta:Key>
+      <fieldList>collectionId,slug
+      </fieldList>
+      <unique>true
+      </unique>
+    </meta:Key>
+    <meta:Key>
+      <fieldList>collectionId,externalId
+      </fieldList>
+      <unique>true
+      </unique>
+    </meta:Key>
+  </keys>
+</meta:Type>

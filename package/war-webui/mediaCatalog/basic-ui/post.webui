@@ -1,0 +1,27 @@
+<%@doclet
+  tgns:t="context://theme/"
+  tgns:c="context://code/components/"
+  tgns:h="context://code/components/html"
+  tgns:af="class:/spiralcraft/servlet/autofilter/"
+  tgns:cms="class:/spiralcraft/cms/meta/"
+  tgns:fsm="class:/spiralcraft/fsm/"
+  %>
+
+
+    
+  <%Switch 
+    x='[cms:CollectionContext].pathInfo.firstElement()
+        { .=="post"
+          ?"edit"
+          :"view"
+        }'
+    %>
+    <%Case id="view"%>
+      <%view/%>
+    <%/Case%>
+    <%Case id="edit"%>
+      <%edit/%>
+    <%/Case%>
+  <%/Switch%>
+
+<%/@doclet%>

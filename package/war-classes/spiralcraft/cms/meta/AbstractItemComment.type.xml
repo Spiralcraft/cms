@@ -1,0 +1,40 @@
+<meta:Type
+  xmlns:meta="class:/spiralcraft/data/types/meta/"
+  xmlns:cms="class:/spiralcraft/cms/meta/"
+  >
+
+  <archetype><cms:Comment.type/>
+  </archetype>
+  
+  <fields>
+    <meta:Field>
+      <name>collectionId
+      </name>
+      <type><LSID.type/>
+      </type>
+    </meta:Field>
+    <meta:Field>
+      <name>itemId
+      </name>
+      <type><LSID.type/>
+      </type>
+    </meta:Field>
+    <meta:Field>
+      <name>externalId
+      </name>
+      <type><LSID.type/>
+      </type>
+    </meta:Field>
+  </fields>
+  
+  <keys>
+    <meta:Key>
+      <fieldList>itemId
+      </fieldList>
+    </meta:Key>
+    <meta:Key>
+      <fieldList>collectionId,externalId
+      </fieldList>
+    </meta:Key>
+  </keys>
+</meta:Type>

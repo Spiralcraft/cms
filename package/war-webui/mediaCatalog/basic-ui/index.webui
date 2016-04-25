@@ -1,0 +1,56 @@
+<%@doclet
+  tgns:theme="context://theme/"
+  tgns:cms="class:/spiralcraft/cms/meta/"
+  tgns:mc="context://code/spiralcraft-cms/mediaCatalog/components/"
+  tgns:dtask="class:/spiralcraft/data/task/"
+  tgns:swa="class:/spiralcraft/webapp/meta/"
+  tgns:c="context://code/components/"
+  tgns:h="context://code/components/html/"
+  tgns:j="class:/java/lang/"
+  %>
+  <%c:Session x="[#s] { showDrafts:=false }"%>
+    <%c:RequestData x="[#request] { pp:[@j:Integer] }"%> 
+      <%With x="[cms:CollectionContext].collection"%>
+        <%theme:activity-page activityClass="catalog-index-activity" 
+          activityTitle="{|[cms:CollectionContext].collection.title{.!=null?.:[cms:CollectionContext].collection.code}|}
+          "%>
+          <%h:Stylesheet href="{|[c:page].cssURI|}/spiralcraft-cms/catalog.css"/%>  
+          <%If x=".!=null"%>
+            <div class="activity-actions">
+              <%If x="[cms:CollectionContext].canPost([swa:Session].user)"%>
+                <a href="post/new" class="button">New Post</a>
+                <a href="settings" class="button">Settings</a>
+                <%If x="[s].showDrafts"%>
+                  <%h:Link tag.clazz="button" onAction="[s].showDrafts=false"%>Hide Drafts<%/h:Link%>
+                <%Else/%>
+                  <%h:Link tag.clazz="button" onAction="[s].showDrafts=true"%>Show Drafts<%/h:Link%>
+                <%/If%>
+              <%/If%>
+            </div>
+            
+            <div class="sc-cms-post-index">
+              <%c:Paginate x="rangeOfItems(0,10000)[ [s].showDrafts?true:.published ]" pageSize="5" pageControlX="[request].pp"%>
+                <div class="pager top-pager">
+                  <%c:pagination-control/%>
+                </div>
+                <ul>
+                  <%Iterate%>
+                    <li>
+                    <%mc:item-summary-panel pageX="[c:Paginate].currentPage"/%>
+                    </li>
+                  <%/Iterate%>
+                </ul>
+                <div class="pager bottom-pager">
+                  <%c:pagination-control/%>
+                </div>
+              <%/c:Paginate%>
+            </div>
+          <%Else/%>
+            NO CONTENT HERE
+          <%/If%>
+          
+        <%/theme:activity-page%>
+      <%/With%>
+    <%/c:RequestData%>
+  <%/c:Session%>
+<%/@doclet%>

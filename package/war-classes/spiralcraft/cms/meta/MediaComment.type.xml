@@ -1,0 +1,10 @@
+<meta:Type
+  xmlns:meta="class:/spiralcraft/data/types/meta/"
+  xmlns:ju="class:/java/util/"
+  xmlns:cms="class:/spiralcraft/cms/meta/"
+  >
+  <archetype>
+    <cms:AbstractItemComment.type/>
+  </archetype>
+  
+</meta:Type>

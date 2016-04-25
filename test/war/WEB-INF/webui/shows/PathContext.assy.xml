@@ -1,0 +1,28 @@
+<base:PathContext
+  xmlns:base="context://package-base/"
+  xmlns:cms="class:/spiralcraft/cms/meta/"
+  xmlns:af="class:/spiralcraft/servlet/autofilter/"
+  xmlns:su="class:/spiralcraft/util/"
+  xmlns:jnet="class:/java/net/"
+  xmlns:this="context://code/shows/"
+  >
+
+  <constantImports>
+    [@cms:CatalogContext].(catalogId:="default")
+      { .ensureCatalog()
+      , .
+      }.@log("CatalogContext="+.)
+  </constantImports>
+  
+  <exports>
+    [@this:ShowsContext]
+      .(collectionPath:=[af:PathContext].absolutePathString
+       ,collectionCode:="shows"
+       ,pathInfo:=[@su:Path].([af:PathContext].pathInfo)
+       ,baseURI:=[*jnet:URI{"${spiralcraft.instance.publicURI}"}]
+       )
+      { .ensureCollection()
+      , .
+      }
+  </exports>
+</base:PathContext>

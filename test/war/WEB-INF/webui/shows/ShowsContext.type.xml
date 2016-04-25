@@ -1,0 +1,14 @@
+<meta:Type
+  xmlns:meta="class:/spiralcraft/data/types/meta/"
+  xmlns:cms="class:/spiralcraft/cms/meta/"
+  >
+  <archetype>
+    <cms:CollectionContext.type>
+      <abstract>true
+      </abstract>
+      <collectionType>
+        <cms:MediaCollection.type/>
+      </collectionType>
+    </cms:CollectionContext.type>
+  </archetype>
+</meta:Type>

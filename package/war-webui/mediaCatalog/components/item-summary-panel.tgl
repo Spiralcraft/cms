@@ -1,0 +1,19 @@
+<%@doclet
+  tgns:theme="context://theme/"
+  tgns:cms="class:/spiralcraft/cms/meta/"
+  tgns:mc="context://code/spiralcraft-cms/mediaCatalog/components/"
+  tgns:swa="class:/spiralcraft/webapp/meta/"
+  contextX='{ pageX:=`null` }'
+  %>
+  <div class="sc-cms-postSummary-panel">
+    <h2 class="sc-cms-post-title"><a name='<%=slug/%>' href='<%=slug/%><%=[mc:item-summary-panel].pageX.(){ .!=null?"?pp="+.:""}/%>'><%=title/%></a><%If x="!published"%>  (DRAFT)<%/If%></h2>
+    <div class="sc-cms-post-dateline">
+      Posted by <%=[@swa:User].@forId(creatorId).commonName/%> on <%DateFormat x="publishDate" format="EEEE, MMMM d, yyyy  h:mm a"/%>
+    </div>
+    <div class="sc-cms-post-actions">
+    </div>
+    <div class="sc-cms-post-content">
+      <%=contentDescription/%>
+    </div>
+  </div>
+<%/@doclet%>

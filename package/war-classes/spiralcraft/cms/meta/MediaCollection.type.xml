@@ -1,0 +1,18 @@
+<meta:Type
+  xmlns:meta="class:/spiralcraft/data/types/meta/"
+  xmlns:ju="class:/java/util/"
+  xmlns:cms="class:/spiralcraft/cms/meta/"
+  xmlns:dt="class:/spiralcraft/data/task/"
+  xmlns:j="class:/java/lang/"
+  xmlns:us="class:/spiralcraft/util/string/"
+  xmlns:fn="class:/spiralcraft/lang/functions/"
+  >
+  <archetype>
+    <cms:AbstractCollection.type>
+      <itemType><cms:MediaItem.type/>
+      </itemType>
+      <commentType><cms:MediaComment.type/>
+      </commentType>
+    </cms:AbstractCollection.type>
+  </archetype>
+</meta:Type>

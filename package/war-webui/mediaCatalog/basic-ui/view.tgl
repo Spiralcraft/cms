@@ -1,0 +1,82 @@
+<%@doclet
+  tgns:t="context://theme/"
+  tgns:c="context://code/components/"
+  tgns:h="context://code/components/html/"
+  tgns:af="class:/spiralcraft/servlet/autofilter/"
+  tgns:cms="class:/spiralcraft/cms/meta/"
+  tgns:swa="class:/spiralcraft/webapp/meta/"
+  tgns:fn="class:/spiralcraft/lang/functions/"
+  tgns:j="class:/java/lang/"
+  %>
+  <%c:RequestData x="[#request] { pp:[@j:Integer] }"%>
+  
+    <%With x='[cms:CollectionContext].collection.itemForSlug([cms:CollectionContext].pathInfo.toString())'
+      %>
+      <%If x=".==null"%>
+        <%c:Redirect locationX="[cms:CollectionContext].collectionPath"/%>
+      <%/If%>
+      <%t:activity-page activityClass="blog-post-activity" 
+        activityTitle="{|[cms:CollectionContext].collection.title|} - {|[cms:MediaItem].title|}"
+        displayTitle="false"
+        %>
+        <%h:Stylesheet href="{|[c:page].cssURI|}/spiralcraft-cms/blog.css" /%>
+        <div class="sc-cms-post-actions sc-action-button-bar">
+          <a href='<%=[cms:CollectionContext].collectionPath/%><%=[request].pp{ .!=null?"?pp="+.:""}/%>#<%=.slug/%>' class="button">Return to blog</a>
+          <%If x="[cms:CollectionContext].canEdit([swa:Session].user,.)"%>
+            <a href='<%=[cms:CollectionContext].collectionPath+"post/"+.id+[request].pp{ .!=null?"?pp="+.:""}/%>' class="button">Edit this post</a>
+          <%/If%>
+        </div>
+        
+        <div class="sc-cms-post-panel">
+          <h2 class="sc-cms-post-title"><%=title/%><%If x="!published"%>  (DRAFT)<%/If%></h2>
+          <div class="sc-cms-post-dateline">
+            Posted by <%=[@swa:User].@forId(creatorId).commonName/%> on <%DateFormat x="publishDate" format="EEEE, MMMM d, yyyy  h:mm a"/%>
+          </div>
+          <div class="sc-cms-post-actions sc-action-button-bar">
+          </div>
+          <div class="sc-cms-post-content">
+            <%=contentDescription/%>
+          </div>
+          <section class="sc-cms-comments">
+            <%With x="comments.[*fn:Sort{ `.commentDate`, true }]"%>
+              <h3><%=.@empty?"No Comments":.@size==1?"1 Comment":(""+.@size+" Comments")/%></h3>
+              <%If x="[cms:CollectionContext].canComment([swa:Session].user,[cms:MediaItem])"%>
+                <div class="sc-cms-comment edit">
+                  <%h:Form%>
+                    <%h:TupleEditor 
+                      typeX="[@cms:MediaComment].type"
+                      autoCreate="true"
+                      preSave="@{ collectionId=[cms:MediaItem].collectionId
+                                  ,itemId=[cms:MediaItem].id
+                                  ,commenterId=[swa:Session].user.id
+                                }
+                              "
+                      %>
+                      <%h:TextArea x="content"/%>
+                      <%h:Button onAction="[h:Form].save()"%>Post Comment<%/h:Button%>
+                    <%/h:TupleEditor%>
+                  <%/h:Form%>
+                </div>
+              <%/If%>
+              <ul class="sc-cms-comment-list">
+                <%Iterate%>
+                  <li>
+                    <div class="sc-cms-comment">
+                      <div class="byline">
+                        <span class="poster"><%=displayName??[@swa:User].@forId(commenterId).commonName??"Anonymous"/%></span>  
+                        <span class="date">  <%DateFormat x="commentDate" format="yyyy-MM-dd  h:mm a"/%></span>
+                      </div>
+                      <div class="content">
+                        <%=content/%>
+                      </div>
+                    </div>
+                  </li>
+                <%/Iterate%>
+              </ul>
+            <%/With%>
+          </section>
+        </div>      
+      <%/t:activity-page%>
+    <%/With%>
+  <%/c:RequestData%>
+<%/@doclet%>

@@ -1,0 +1,22 @@
+<meta:Type
+  xmlns:meta="class:/spiralcraft/data/types/meta/"
+  xmlns:ju="class:/java/util/"
+  xmlns:cms="class:/spiralcraft/cms/meta/"
+  >
+  <archetype>
+    <cms:AbstractCollectionItem.type>
+      <collectionType><cms:MediaCollection.type/>
+      </collectionType>
+      <commentType><cms:MediaComment.type/>
+      </commentType>
+    </cms:AbstractCollectionItem.type>
+  </archetype>
+  
+  <fields>
+    <meta:Field>
+      <name>contentDescription
+      </name>
+      <type><String.type/></type>
+    </meta:Field>
+  </fields>
+</meta:Type>

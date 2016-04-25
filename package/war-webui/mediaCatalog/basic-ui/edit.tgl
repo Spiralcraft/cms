@@ -1,0 +1,96 @@
+<%@doclet
+  tgns:t="context://theme/"
+  tgns:cms="class:/spiralcraft/cms/meta/"
+  tgns:mc="context://code/spiralcraft-cms/mediaCatalog/components/"
+  tgns:dtask="class:/spiralcraft/data/task/"
+  tgns:h="context://code/components/html/"
+  tgns:c="context://code/components/"
+  tgns:j="class:/java/lang/"
+  tgns:af="class:/spiralcraft/servlet/autofilter/"
+  tgns:su="class:/spiralcraft/util/"
+  tgns:swa="class:/spiralcraft/webapp/meta/"
+  tgns:jnet="class:/java/net"
+  tgns:vfsf="class:/spiralcraft/vfs/functions/"
+  tgns:json="class:/spiralcraft/json/"
+  tgns:ju="class:/java/util/"
+  %>    
+  <%c:RequestData x="[#request] { pp:[@j:Integer] }" publishNames="pp" debug="true"%>  
+    <%t:activity-page%>
+      <script type="text/javascript">
+        SPIRALCRAFT.dom.registerBodyOnLoad(
+          function(){
+            SPIRALCRAFT.webui.sessionSync(true);
+          }     
+        );
+    
+      </script>
+      <%mc:tinymce/%>
+      <%h:Stylesheet href="{|[c:page].cssURI|}/spiralcraft-cms/blog.css"/%>  
+  
+      
+      <%With x='{ id:=[cms:CollectionContext].pathInfo.lastElement()
+                 ,new:=.id=="new"
+                 ,item:=!.new?[cms:CollectionContext].collection.itemForId(.id):null
+                }'
+        %>
+        <%If x="!new && ![cms:CollectionContext].canEdit([swa:Session].user,item)
+             || new && ![cms:CollectionContext].canPost([swa:Session].user)       
+            "
+          %>
+          <%c:Redirect locationX="[cms:CollectionContext].collectionPath"/%>
+        <%/If%>
+        <%If x="!new && item==null"%>
+          <%c:Redirect locationX="[cms:CollectionContext].collectionPath"/%>
+        <%Else/%>
+  
+          <div class="sc-action-button-bar">
+            <%If x="!new"%>
+              <a href="<%=[cms:CollectionContext].collectionPath+item.slug/%><%=[request].pp{ .!=null?"?pp="+.:""}/%>" class="button">View Post</a>
+            <%/If%>
+            <a href="<%=[cms:CollectionContext].collectionPath/%><%=[request].pp{ .!=null?"?pp="+.:""}/%>#<%=.item.slug/%>" class="button">Return to blog</a>
+          </div>
+          <%h:Form 
+            tag.clazz="blog-post-editor data-entry"
+            afterSave='new?[*c:UI].redirect(item.id):null'
+            %>
+            <%h:TupleEditor x="item" autoCreate="true"
+              preSave='@{ collectionId=[cms:CollectionContext].collection.id
+                        , slug=[cms:CollectionContext].collection.makeSlug(.)
+                        , creatorId=(creatorId==null?[swa:Session].user.id:creatorId)
+                        }
+                      '
+              errorTag.tagName="div"
+              errorTag.clazz="error"
+              %>
+              
+              <ul class="sc-labeled-control-flow">
+                <li>
+                  <%h:FormField%>
+                    <%h:Label%>Title<%/h:Label%>
+                    <%h:TextInput x="title" tag.size="60"/%>
+                  <%/h:FormField%>
+                </li>
+                <li>
+                  <%h:FormField%>
+                    <%h:Label%>Content<%/h:Label%>
+                    <%h:TextArea x="contentDescription" tag.clazz="richtext" tag.cols="80" tag.rows="25"/%>
+                  <%/h:FormField%>
+                </li>
+              </ul>
+              <div class="sc-form-button-bar">
+                <%h:Button onAction="[h:Form].save()"%>Save<%/h:Button%>
+                <%h:Button onAction='[h:Form].revert()'%>Cancel<%/h:Button%>
+                <%If x=".published"%>
+                  <%h:Button onAction='@{ .published=false,[h:Form].save()}' tag.clazz="right"%>Unpublish<%/h:Button%>
+                <%Else/%>
+                  <%h:Button onAction='@{ .published=true, .publishDate=[@ju:Date].(), [h:Form].save()}' tag.clazz="right"%>Publish<%/h:Button%>
+                <%/If%>
+                <%h:Button onAction='@{ @tuple.delete(),[h:Form].save()}' tag.clazz="right"%>Delete<%/h:Button%>
+              </div>
+            <%/h:TupleEditor%>
+          <%/h:Form%>
+        <%/If%>
+      <%/With%>
+    <%/t:activity-page%>
+  <%/c:RequestData%>
+<%/@doclet%>
