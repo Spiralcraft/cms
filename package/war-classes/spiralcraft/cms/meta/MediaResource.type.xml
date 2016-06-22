@@ -1,0 +1,67 @@
+<meta:Type
+  xmlns:meta="class:/spiralcraft/data/types/meta/"
+  xmlns:ju="class:/java/util/"
+  xmlns:cms="class:/spiralcraft/cms/meta/"
+  >
+
+  
+  <fields>
+    <meta:SequenceField>
+      <name>id
+      </name>
+      <type><String.type/>
+      </type>
+    </meta:SequenceField>
+
+    <meta:Field>
+      <name>mediaItemId
+      </name>
+      <type><String.type/>
+      </type>
+    </meta:Field>
+    
+    <meta:Field>
+      <name>resourceURL
+      </name>
+      <type><URI.type/>
+      </type>
+    </meta:Field>
+
+    <meta:Field>
+      <name>embedMarkup
+      </name>
+      <type><String.type/>
+      </type>
+    </meta:Field>
+
+    <meta:Field>
+      <name>partNum
+      </name>
+      <type><Integer.type/>
+      </type>
+    </meta:Field>
+    
+    <meta:RelativeField>
+      <name>mediaItem
+      </name>
+      <type><cms:MediaItem.type/>
+      </type>
+      <fieldList>mediaItemId
+      </fieldList>
+    </meta:RelativeField>
+    
+  </fields>
+  
+  <keys>
+    <meta:Key>
+      <primary>true
+      </primary>
+      <fieldList>id
+      </fieldList>
+    </meta:Key>
+    <meta:Key>
+      <fieldList>mediaItemId
+      </fieldList>
+    </meta:Key>
+  </keys>
+</meta:Type>

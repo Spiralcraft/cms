@@ -1,0 +1,12 @@
+<%@doclet
+  tgns:h="context://code/components/html/"
+  tgns:ju="class:/java/util/"
+  %>
+  <div class="resource-grid">
+    <caption>Resources</caption>
+    
+    <div class="resource-grid-controls">
+      <%h:Button onAction="null"%>Add Resource<%/h:Button%>
+    </div>
+  </div>
+<%/@doclet%>

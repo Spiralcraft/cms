@@ -1,0 +1,26 @@
+<%@doclet
+  tgns:h="context://code/components/html/"
+  tgns:ju="class:/java/util/"
+  tgns:mc="context://code/spiralcraft-cms/mediaCatalog/components/"
+  %>
+  <div class="resource-grid">
+    <h2>Custom Resources</h2>
+    
+    <div class="resource-grid-controls" style="width:100%;">
+      <%h:AggregateEditor 
+        x="resources" 
+        padSize="1"
+        padX="partNum==null && resourceURL==null && embedMarkup==null"
+        autoKey="true"
+        %>
+        <ul style="list-style: outside none; padding-left: 0;">
+          <%Iterate%>
+            <li>
+              <%mc:item-editor-resource-controls/%>
+            </li>
+          <%/Iterate%>
+        </ul>
+      <%/h:AggregateEditor%>
+    </div>
+  </div>
+<%/@doclet%>

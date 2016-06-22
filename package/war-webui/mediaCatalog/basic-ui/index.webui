@@ -18,7 +18,7 @@
           <%If x=".!=null"%>
             <div class="activity-actions">
               <%If x="[cms:CollectionContext].canPost([swa:Session].user)"%>
-                <a href="post/new" class="button">New Post</a>
+                <a href="post/new" class="button">New Item</a>
                 <a href="settings" class="button">Settings</a>
                 <%If x="[s].showDrafts"%>
                   <%h:Link tag.clazz="button" onAction="[s].showDrafts=false"%>Hide Drafts<%/h:Link%>

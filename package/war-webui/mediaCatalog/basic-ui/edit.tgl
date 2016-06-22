@@ -53,6 +53,7 @@
             tag.clazz="blog-post-editor data-entry"
             afterSave='new?[*c:UI].redirect(item.id):null'
             %>
+            
             <%h:TupleEditor x="item" autoCreate="true"
               preSave='@{ collectionId=[cms:CollectionContext].collection.id
                         , slug=[cms:CollectionContext].collection.makeSlug(.)
@@ -62,31 +63,10 @@
               errorTag.tagName="div"
               errorTag.clazz="error"
               %>
-              
-              <ul class="sc-labeled-control-flow">
-                <li>
-                  <%h:FormField%>
-                    <%h:Label%>Title<%/h:Label%>
-                    <%h:TextInput x="title" tag.size="60"/%>
-                  <%/h:FormField%>
-                </li>
-                <li>
-                  <%h:FormField%>
-                    <%h:Label%>Content<%/h:Label%>
-                    <%h:TextArea x="contentDescription" tag.clazz="richtext" tag.cols="80" tag.rows="25"/%>
-                  <%/h:FormField%>
-                </li>
-              </ul>
-              <div class="sc-form-button-bar">
-                <%h:Button onAction="[h:Form].save()"%>Save<%/h:Button%>
-                <%h:Button onAction='[h:Form].revert()'%>Cancel<%/h:Button%>
-                <%If x=".published"%>
-                  <%h:Button onAction='@{ .published=false,[h:Form].save()}' tag.clazz="right"%>Unpublish<%/h:Button%>
-                <%Else/%>
-                  <%h:Button onAction='@{ .published=true, .publishDate=[@ju:Date].(), [h:Form].save()}' tag.clazz="right"%>Publish<%/h:Button%>
-                <%/If%>
-                <%h:Button onAction='@{ @tuple.delete(),[h:Form].save()}' tag.clazz="right"%>Delete<%/h:Button%>
-              </div>
+              <%mc:item-editor-form-actions/%>
+              <%mc:item-editor-form-controls/%>
+              <%mc:item-editor-form-actions/%>
+              <%mc:item-editor-resource-grid/%>
             <%/h:TupleEditor%>
           <%/h:Form%>
         <%/If%>

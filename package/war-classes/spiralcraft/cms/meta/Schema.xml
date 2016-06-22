@@ -31,5 +31,9 @@
       <type><cms:MediaComment.type/>
       </type>
     </meta:Entity>
+    <meta:Entity>
+      <type><cms:MediaResource.type/>
+      </type>
+    </meta:Entity>
   </entities>
 </meta:Schema>

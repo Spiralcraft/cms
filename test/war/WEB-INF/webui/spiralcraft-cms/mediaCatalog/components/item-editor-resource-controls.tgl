@@ -1,0 +1,29 @@
+<%@doclet
+  tgns:h="context://code/components/html/"
+  %>
+  <div class="resource-grid-item" style="border-left: 5px solid #AAAAAA;padding-left: 1em; margin-bottom: 1em;">
+
+    <ul class="sc-labeled-control-flow">
+      <li>
+        <%h:FormField x="partNum"%>
+          <%h:Label%>Part #<%/h:Label%>
+          <%h:TextInput tag.style="width: 3em"/%>
+        <%/h:FormField%>
+        <%h:FormField x="resourceURL"%>
+          <%h:Label%>URL<%/h:Label%>
+          <%h:TextInput tag.style="width: 35em"/%>
+        <%/h:FormField%>
+        <%h:FormField x="."%>
+          <%h:Label%>&nbsp;<%/h:Label%>
+          <%h:Button onAction="@tuple.delete()"%>Delete<%/h:Button%>
+        <%/h:FormField%>
+      </li>
+      <li>
+        <%h:FormField x="embedMarkup" tag.style="width:100%"%>
+          <%h:Label%>Embed Markup<%/h:Label%>
+          <%h:TextArea tag.style="width: 100%;"/%>
+        <%/h:FormField%>
+      </li>
+    </ul>
+  </div>
+<%/@doclet%>

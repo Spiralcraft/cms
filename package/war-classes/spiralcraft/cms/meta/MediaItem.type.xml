@@ -3,6 +3,11 @@
   xmlns:ju="class:/java/util/"
   xmlns:cms="class:/spiralcraft/cms/meta/"
   >
+  <description>
+    A collection of AV media resources, e.g. photos, audio clips, video clips,
+      that taken together represent an abstract "event" with a duration and
+      a time.
+  </description>
   <archetype>
     <cms:AbstractCollectionItem.type>
       <collectionType><cms:MediaCollection.type/>
@@ -17,6 +22,32 @@
       <name>contentDescription
       </name>
       <type><String.type/></type>
+    </meta:Field>
+    <meta:RelativeField>
+      <name>resources
+      </name>
+      <type><cms:MediaResource.list.type/>
+      </type>
+      <referencedFieldList>mediaItemId
+      </referencedFieldList>
+      <child>true
+      </child>
+    </meta:RelativeField>
+    <meta:Field>
+      <name>publishTime
+      </name>
+      <type><Date.type/>
+      </type>
+      <description>The time that this item was or will be published.
+      </description>
+    </meta:Field>
+    <meta:Field>
+      <name>resourceDuration
+      </name>
+      <type><Duration.type/>
+      </type>
+      <description>The total time of the media resources.
+      </description>
     </meta:Field>
   </fields>
 </meta:Type>

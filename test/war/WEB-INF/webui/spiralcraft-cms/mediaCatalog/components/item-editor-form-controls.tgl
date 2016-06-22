@@ -1,0 +1,35 @@
+<%@doclet
+  tgns:h="class:/spiralcraft/servlet/webui/components/html/"
+  tgns:c="context://code/components/"
+  %>
+  <%c:RenderTo target="[h:Page].head"%>
+    <script src='/js/moment-moment/moment.min.js'></script>
+    <script src='/js/bevacqua-rome/rome.standalone.js'></script>
+    <link rel="stylesheet" type="text/css" href="/js/bevacqua-rome/rome.css"/>
+  <%/c:RenderTo%>
+  <ul class="sc-labeled-control-flow">
+    <li>
+      <%h:FormField x="title"%>
+        <%h:Label%>Title<%/h:Label%>
+        <%h:TextInput tag.size="60"/%>
+      <%/h:FormField%>
+    </li>
+    <li>
+      <%h:FormField x="contentDescription"%>
+        <%h:Label%>Description Markup<%/h:Label%>
+        <%h:TextArea tag.clazz="richtext" tag.cols="80" tag.rows="25"/%>
+      <%/h:FormField%>
+    </li>
+    <li>
+      <%h:FormField x="eventTime"%>
+        <%h:Label%>Time of Event<%/h:Label%>
+        <%h:DateInput useNativePicker="true"/%>
+        <script type="text/javascript">
+          var element=$SC("<%=[h:FormField].inputId/%>").element();
+          console.log(element);
+          rome(element);
+        </script>
+      <%/h:FormField%>
+    </li>
+  </ul>
+<%/@doclet%>
