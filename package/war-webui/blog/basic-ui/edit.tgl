@@ -82,6 +82,7 @@
                 <%h:Button onAction='[h:Form].revert()'%>Cancel<%/h:Button%>
                 <%If x=".published"%>
                   <%h:Button onAction='@{ .published=false,[h:Form].save()}' tag.clazz="right"%>Unpublish<%/h:Button%>
+                  <%h:Button onAction='@{ .publishDate=[@ju:Date].(),[h:Form].save()}' tag.clazz="right"%>Republish<%/h:Button%>
                 <%Else/%>
                   <%h:Button onAction='@{ .published=true, .publishDate=[@ju:Date].(), [h:Form].save()}' tag.clazz="right"%>Publish<%/h:Button%>
                 <%/If%>
