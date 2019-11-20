@@ -1,0 +1,22 @@
+<%@doclet
+  tgns:t="context://theme/"
+  tgns:c="context://code/components/"
+  tgns:h="context://code/components/html"
+  tgns:af="class:/spiralcraft/servlet/autofilter/"
+  tgns:cms="class:/spiralcraft/cms/meta/"
+  tgns:fsm="class:/spiralcraft/fsm/"
+  %>
+
+   
+  <%Switch 
+    x='[cms:BlogContext].frontPageType'
+    %>
+    <%Case id="INDEX"%>
+      <%c:Redirect locationX='[cms:BlogContext].blogPath+"index"'/%>
+    <%/Case%>
+    <%Case id="LATEST"%>
+      <%c:Redirect locationX='[cms:BlogContext]{.blogPath+.blog.latestPublishedPost().slug}'/%>
+    <%/Case%>
+  <%/Switch%>
+
+<%/@doclet%>

@@ -46,6 +46,15 @@
       <type><URI.type/>
       </type>
     </meta:Field>
+    <meta:Field>
+      <name>frontPageType
+      </name>
+      <description>The content type that should be displayed on the front page-
+        one of INDEX or LATEST
+      </description>
+      <type><String.type/>
+      </type>
+    </meta:Field>
   </fields>
   
   <methods>

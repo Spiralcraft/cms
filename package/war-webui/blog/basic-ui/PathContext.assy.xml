@@ -7,7 +7,7 @@
   <defaultResource>post.webui
   </defaultResource>
 
-  <indexResource>index.webui
+  <indexResource>front.webui
   </indexResource>
 
 </af:PathContext>

@@ -241,6 +241,15 @@
       <x>
         [cms:Blog].posts.[*fn:Sort{`.publishDate`,true}][offset..(offset+size)]
       </x>
-    </meta:Method>    
+    </meta:Method>  
+    <meta:Method>
+      <name>latestPublishedPost
+      </name>
+      <returnType><cms:BlogPost.type/>
+      </returnType>
+      <x>
+        [cms:Blog].posts.[*fn:Sort{`.publishDate`,true}][.published][0]
+      </x>
+    </meta:Method>         
   </methods>
 </meta:Type>

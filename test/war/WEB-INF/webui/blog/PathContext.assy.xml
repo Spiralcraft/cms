@@ -19,6 +19,7 @@
        ,blogId:=[cms:CatalogContext].catalogId
        ,pathInfo:=[@su:Path].([af:PathContext].pathInfo)
        ,baseURI:=[*jnet:URI{"${spiralcraft.instance.publicURI}"}]
+       ,frontPageType:="LATEST"
        )
       { .ensureBlog()
       , .
