@@ -1,0 +1,9 @@
+#!/bin/bash
+export JAVA="/cygdrive/c/Program Files/Java/jdk-10.0.1/bin/java"
+export SCBUILD="../../build"
+export ANTJAR="$SCBUILD/lib/ant-launcher.jar"
+ls "$JAVA"
+echo $JAVA
+"$JAVA" -jar $ANTJAR
+"$JAVA" -jar $ANTJAR  -f test/run/LAUNCH.ant.xml launch
+
