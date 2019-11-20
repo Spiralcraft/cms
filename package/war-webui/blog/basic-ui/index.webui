@@ -9,7 +9,7 @@
   tgns:j="class:/java/lang/"
   %>
   <%c:Session x="[#s] { showDrafts:=false }"%>
-    <%c:RequestData x="[#request] { pp:[@j:Integer] }"%> 
+    <%c:RequestData x='[#request] { pp:[@j:Integer],ipp:=5,order:="pub",format:="summary" }'%> 
       <%With x="[cms:BlogContext].blog"%>
         <%theme:activity-page activityClass="blog-index-activity" 
           activityTitle="{|[cms:BlogContext].blog.title{.!=null?.:[cms:BlogContext].blog.id}|}
@@ -29,16 +29,27 @@
           </div>
           
           <div class="sc-cms-post-index">
-            <%c:Paginate x="rangeOfPosts(0,10000)[ [s].showDrafts?true:.published ]" pageSize="5" pageControlX="[request].pp"%>
+            <%c:Paginate x="rangeOfPosts(0,10000)[ [s].showDrafts?true:.published ]" pageSizeX="[request].ipp" pageControlX="[request].pp"%>
               <div class="pager top-pager">
                 <%c:pagination-control/%>
               </div>
               <ul>
-                <%Iterate%>
-                  <li>
-                  <%blog:postSummary-panel pageX="[c:Paginate].currentPage"/%>
-                  </li>
-                <%/Iterate%>
+                <%Switch x='[request].format'%>
+                  <%Case id="summary"%>
+                    <%Iterate%>
+                      <li>
+                      <%blog:postSummary-panel pageX="[c:Paginate].currentPage"/%>
+                      </li>
+                    <%/Iterate%>
+                  <%/Case%>
+                  <%Case id="index"%>
+                    <%Iterate%>
+                      <li>
+                      <%blog:postIndexItem-panel pageX="[c:Paginate].currentPage"/%>
+                      </li>
+                    <%/Iterate%>
+                  <%/Case%>
+                <%/Switch%>
               </ul>
               <div class="pager bottom-pager">
                 <%c:pagination-control/%>
