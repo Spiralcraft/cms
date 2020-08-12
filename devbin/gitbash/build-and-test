@@ -1,0 +1,8 @@
+#!/bin/bash
+source $(dirname $0)/common.sh
+
+echo $0
+#"$JAVA" -jar $ANTJAR -f sandbox-util/update-repo.ant.xml
+"$JAVA" -jar $ANTJAR
+$0/test
+

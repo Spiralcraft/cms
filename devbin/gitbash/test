@@ -1,0 +1,4 @@
+#!/bin/bash
+source $(dirname $0)/common.sh
+echo $0
+"$JAVA" -jar $ANTJAR  -f test/run/LAUNCH.ant.xml launch
