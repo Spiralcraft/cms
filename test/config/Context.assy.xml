@@ -10,5 +10,11 @@
       <value>true
       </value>
     </httpd:InitParameter>  
+    <httpd:InitParameter>
+      <name>spiralcraft.servlet.autofilter.tracePathResolution
+      </name>
+      <value>false
+      </value>
+    </httpd:InitParameter>  
   </initParameters>
 </base:Context>

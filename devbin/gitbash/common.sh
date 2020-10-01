@@ -1,7 +1,13 @@
 export SANDBOX="$(dirname $0)/../../../.."
-source $(dirname $0)/.sandbox.env
+if [ -f "$(dirname $0)/.sandbox.env" ]; then
+  source $(dirname $0)/.sandbox.env
+fi
 export SCBUILD=$SANDBOX/build
-source $SANDBOX/build.local/gitbash.env
+if [ -f "$SANDBOX/build.local/gitbash.env" ]; then
+  source $SANDBOX/build.local/gitbash.env
+fi
 export ANTJAR="$SCBUILD/lib/ant-launcher.jar"
 export JAVA=$JAVA_HOME/java
-source $(dirname $0)/.env
+if [ -f "$(dirname $0)/.env" ]; then
+  source $(dirname $0)/.env
+fi

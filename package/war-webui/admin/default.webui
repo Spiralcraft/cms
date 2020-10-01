@@ -1,0 +1,17 @@
+<%t:activity-page
+  tgns:t="context://theme/"
+  tgns:ac="context://code/admin/components/"
+  tgns:swm="class:/spiralcraft/webapp/meta/"
+  tgns:h="class:/spiralcraft/servlet/webui/components/html"
+  activityTitle='CMS Admin'
+  activityClass='cmsAdmin-activity'
+  crumbTrailX='[{ [@swm:Path].(path:="/",name:="Home")
+                 ,[@swm:Path].(path:="/admin/",name:="Admin")
+                 ,[@swm:Path].(path:="/admin/cms/",name:="CMS")
+               }]
+              '
+  %>
+  <%RenderTo target="[h:Page].head"%>
+	<script type="module" src='/js/spiralcraft-cms/admin/applet.js'></script>    
+  <%/RenderTo%>
+<%/t:activity-page%>

@@ -5,9 +5,38 @@
   <property name="depends.dir" location="../../repo"/>
   <property file="version.properties"/>
   
+  <property name="node.home" location="c:/Program Files/nodejs"/>
+  
   <import file="../../build/build-common.xml"/>
   
   <target name="launch" description="Launch test server">
     <ant antfile="LAUNCH.ant.xml" dir="test/run"/>
   </target>
+  
+  <target name="npm-install">
+    <echo>npm-install</echo>
+    <exec executable="${node.home}/node.exe" dir="npm">
+      <arg value="${node.home}/node_modules/npm/bin/npm-cli.js"/>
+      <arg value="install"/>
+  
+    </exec>
+  </target>
+  
+  <target name="update-deps" depends="build-ivy.update-deps,npm-install" description="update all dependencies">
+  </target>
+  
+  <target name="build-js">
+    <echo>build-js</echo>
+    <exec executable="c:/Program Files/nodejs/node.exe" dir="npm">
+      <arg value="node_modules/rollup/dist/bin/rollup"/>
+      <arg value="--config"/>
+      <arg value="rollup.config.js"/>
+  
+    </exec>
+  </target>
+  
+  <target name="pack" depends="update-deps,build-js,build-app.pack" description="bundle js and assemble package">
+  </target>
+  
+  
 </project>
