@@ -55,6 +55,14 @@
       <type><String.type/>
       </type>
     </meta:Field>
+    <meta:Field>
+      <name>allowAnonComments
+      </name>
+      <description>Whether to allow anonymous comments
+      </description>
+      <type><Boolean.type/>
+      </type>
+    </meta:Field>
   </fields>
   
   <methods>
@@ -111,7 +119,7 @@
       </returnType>
       <contextX>[#p] { user:[@swa:User], blogPost:[@cms:BlogPost] }
       </contextX>
-      <x>user!=null
+      <x>(user==null &amp;&amp; [cms:BlogContext].allowAnonComments) || user!=null
       </x>
     </meta:Method>
   </methods>

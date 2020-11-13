@@ -10,7 +10,6 @@ h2.sc-cms-post-title
 
 div.sc-cms-post-dateline
 {
-  font-size: 75%;
   font-weight: bold;
 }
 
@@ -82,7 +81,7 @@ div.sc-cms-post-index > ul h2.sc-cms-post-title
 {
   list-style: none;
   padding-left:0;
-  width: 20em;
+  width: 100%;
 }
 
 .blog-post-activity ul.sc-cms-comment-list li
@@ -93,7 +92,6 @@ div.sc-cms-post-index > ul h2.sc-cms-post-title
 
 .blog-post-activity ul.sc-cms-comment-list .byline
 {
-  font-size: 75%;
   font-weight: bold;
 }
 

@@ -20,6 +20,7 @@
        ,pathInfo:=[@su:Path].([af:PathContext].pathInfo)
        ,baseURI:=[*jnet:URI{"${spiralcraft.instance.publicURI}"}]
        ,frontPageType:="LATEST"
+       ,allowAnonComments:=true
        )
       { .ensureBlog()
       , .

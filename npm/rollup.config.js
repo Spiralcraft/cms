@@ -4,6 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 import multiInput from 'rollup-plugin-multi-input';
 import cloneDeep from 'clone-deep';
+import path from 'path';
 
 const production = true;
 
@@ -22,7 +23,7 @@ const template= {
       css: css => {
         css.write("applet.css");
         
-      }
+        }
     }),
 
     // If you have external dependencies installed from
@@ -32,7 +33,10 @@ const template= {
     // https://github.com/rollup/plugins/tree/master/packages/commonjs
     resolve({
       browser: true,
-      dedupe: ['svelte']
+      dedupe: ['svelte','svelte/internal'],
+      customResolveOptions: {
+        moduleDirectory: path.resolve('node_modules')
+      }      
     }),
     commonjs(),
 

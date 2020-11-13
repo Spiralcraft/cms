@@ -1,0 +1,99 @@
+<%@doclet
+  tgns:t="context://theme/"
+  tgns:c="context://code/components/"
+  tgns:h="context://code/components/html/"
+  tgns:af="class:/spiralcraft/servlet/autofilter/"
+  tgns:cms="class:/spiralcraft/cms/meta/"
+  tgns:swa="class:/spiralcraft/webapp/meta/"
+  tgns:fn="class:/spiralcraft/lang/functions/"
+  tgns:j="class:/java/lang/"
+  tgns:rcw="context://code/spiralcraft-recaptcha"
+  tgns:sr="class:/spiralcraft/rules/"
+  tgns:json="class:/spiralcraft/json/"
+  tgns:http="class:/javax/servlet/http/"
+  %>
+
+  <%If x="[cms:BlogContext].canComment([swa:Session].user,[cms:BlogPost])"%>
+    <%With x="[#editor] 
+      { anon:=[swa:Session].user==null
+      , saved:=false
+      }"
+      %>
+      <div class="sc-cms-comment edit">
+        <style>
+          .formLine { margin-bottom: 0.5em; }
+          .formLine label { display: block; font-weight: bold; }
+          textarea, input {
+              border:1px solid #dadada;
+              border-radius:3px;
+          }
+          
+          textarea:focus, input:focus { 
+              outline:none;
+              border-color:#9ecaed;
+              box-shadow:0 0 5px #9ecaed;
+          }          
+          
+          .sc-webui-is-error { border-color: red }
+          .sc-webui-error { color: red }
+        </style>
+        <h3 class="new-comment-prompt">Comment on this post</h3>
+        <%rcw:recaptcha-context%>
+      
+          <%h:Form reloadAfterAction="true" onSave="[editor].saved=true"%>
+            <%h:TupleEditor 
+              typeX="[@cms:BlogComment]"
+              autoCreate="true"
+              preSave='@{ blogId=[cms:BlogPost].blogId
+                    ,blogPostId=[cms:BlogPost].id
+                    ,commenterId=[swa:Session].user.id
+                    ,[editor].anon?[rcw:recaptcha].validate():null
+                    ,commenterIP=[http:HttpServletRequest].remoteAddr
+                  }
+                  '
+              %>
+              <%.rules%>
+                <%sr:ExpressionRule
+                  expression="![editor].anon || [rcw:recaptcha].apiResult.success"
+                  message="Captcha must be completed successfully"
+                /%>
+              <%/.rules%>
+              <%!%>
+                <%=[editor].[*json:ToJson]/%>
+                <%=[rcw:recaptcha].[*json:ToJson]/%>
+              <%/!%>
+			  		  <%If x="[editor].saved"%>
+			  		    <div class="thankyou-message formLine">
+			  		      Thank you for your comment. It will be published after review.
+			  		    </div>
+			  		  <%/If%>
+			  		  <%Iterate x="[h:Form].state.errors"%>
+			  		    <div class="formError"><%=./%>
+			  		    </div>
+			  		  <%/Iterate%>
+             <%If x="[editor].anon"%>
+                <%h:FormField tag.clazz="formLine"%>
+                  <%h:Label%>Your Name<%/h:Label%>
+                  <%h:TextInput x="displayName" required="true"/%>
+                <%/h:FormField%>
+              <%/If%>
+              <%h:FormField tag.clazz="formLine"%>
+                <%h:Label%>Comment<%/h:Label%>
+                <%h:TextArea x="content" required="true"/%>
+              <%/h:FormField%>
+              <%If x="[editor].anon"%>
+                <%h:FormField tag.clazz="recaptcha formLine"%>
+                  <%rcw:recaptcha-control/%>
+                <%/h:FormField%>
+              <%/If%>
+              <div class="ce-buttons">
+                <%h:Button onAction="[h:Form].save()"%>Post Comment<%/h:Button%>
+              </div>
+            <%/h:TupleEditor%>
+          <%/h:Form%>
+        
+        <%/rcw:recaptcha-context%>
+      </div>
+    <%/With%>
+  <%/If%>
+<%/@doclet%>

@@ -61,6 +61,27 @@
       <type><String.type/>
       </type>
     </meta:Field>
+    
+    <meta:Field>
+      <name>approved
+      </name>
+      <type><Boolean.type/>
+      </type>
+    </meta:Field>
+    
+    <meta:Field>
+      <name>deleted
+      </name>
+      <type><Boolean.type/>
+      </type>
+    </meta:Field>
+    
+    <meta:Field>
+      <name>commenterIP
+      </name>
+      <type><String.type/>
+      </type>
+    </meta:Field>
   </fields>
   
   <keys>

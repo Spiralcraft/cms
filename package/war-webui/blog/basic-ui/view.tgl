@@ -7,6 +7,7 @@
   tgns:swa="class:/spiralcraft/webapp/meta/"
   tgns:fn="class:/spiralcraft/lang/functions/"
   tgns:j="class:/java/lang/"
+  tgns:th="class:/spiralcraft/text/html/"
   %>
   <%c:RequestData x="[#request] { pp:[@j:Integer] }"%>
   
@@ -43,42 +44,25 @@
             <%=content/%>
           </div>
           <section class="sc-cms-comments">
-            <%With x="comments.[*fn:Sort{ `.commentDate`, true }]"%>
+            <%With x="comments.[*fn:Sort{ `.commentDate`, true }][.approved && !.deleted]"%>
               <h3><%=.@empty?"No Comments":.@size==1?"1 Comment":(""+.@size+" Comments")/%></h3>
-              <%If x="[cms:BlogContext].canComment([swa:Session].user,[cms:BlogPost])"%>
-                <div class="sc-cms-comment edit">
-                  <%h:Form%>
-                    <%h:TupleEditor 
-                      typeX="[@cms:BlogComment].type"
-                      autoCreate="true"
-                      preSave="@{ blogId=[cms:BlogPost].blogId
-                                  ,blogPostId=[cms:BlogPost].id
-                                  ,commenterId=[swa:Session].user.id
-                                }
-                              "
-                      %>
-                      <%h:TextArea x="content"/%>
-                      <%h:Button onAction="[h:Form].save()"%>Post Comment<%/h:Button%>
-                    <%/h:TupleEditor%>
-                  <%/h:Form%>
-                </div>
-              <%/If%>
               <ul class="sc-cms-comment-list">
                 <%Iterate%>
                   <li>
                     <div class="sc-cms-comment">
                       <div class="byline">
-                        <span class="poster"><%=displayName??[@swa:User].@forId(commenterId).commonName??"Anonymous"/%></span>  
-                        <span class="date">  <%DateFormat x="commentDate" format="yyyy-MM-dd  h:mm a"/%></span>
+                        <span class="date">  <%DateFormat x="commentDate" format="MM/dd/yyyy h:mm a"/%></span>
+                        <span class="poster"><%=[@th:HtmlEncoder].@encode(displayName??[@swa:User].@forId(commenterId).commonName??"Anonymous")/%></span>  
                       </div>
                       <div class="content">
-                        <%=content/%>
+                        <%=[@th:HtmlEncoder].@encode(content)/%>
                       </div>
                     </div>
                   </li>
                 <%/Iterate%>
               </ul>
             <%/With%>
+            <%newComment/%>
           </section>
         </div>      
       <%/t:activity-page%>

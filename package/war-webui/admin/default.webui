@@ -12,6 +12,7 @@
               '
   %>
   <%RenderTo target="[h:Page].head"%>
+    <link rel="stylesheet" href="/js/spiralcraft-cms/admin/applet.css">  
 	<script type="module" src='/js/spiralcraft-cms/admin/applet.js'></script>    
   <%/RenderTo%>
 <%/t:activity-page%>

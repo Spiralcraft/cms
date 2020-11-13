@@ -1,0 +1,23 @@
+<rpc:Filter
+  xmlns:wapi="class:/spiralcraft/webapi/"
+  xmlns:rpc="class:/spiralcraft/servlet/rpc/"
+  xmlns:t="class:/spiralcraft/task/"
+  xmlns:ju="class:/java/util/"
+  xmlns:j="class:/java/lang/"
+  xmlns:json="class:/spiralcraft/json/"
+  xmlns:http="class:/javax/servlet/http/"
+  xmlns:cms="class:/spiralcraft/cms/meta/"
+  xmlns:dt="class:/spiralcraft/data/task/"
+  xmlns:sr="class:/spiralcraft/rules/"
+  xmlns:fn="class:/spiralcraft/lang/functions/"
+  xmlns:sl="class:/spiralcraft/lang/"
+  >
+
+  <handlers>
+    <CommentsAdmin>
+      <name>commentsAdmin
+      </name>
+    </CommentsAdmin>
+  </handlers>
+
+</rpc:Filter>

@@ -1,6 +1,9 @@
 <meta:Type
   xmlns:meta="class:/spiralcraft/data/types/meta/"
   xmlns:cms="class:/spiralcraft/cms/meta/"
+  xmlns:dm="class:/spiralcraft/data/methods/"
+  xmlns:j="class:/java/lang"
+  xmlns:dt="class:/spiralcraft/data/task"
   >
 
   <archetype><cms:Comment.type/>
@@ -25,6 +28,14 @@
       <type><LSID.type/>
       </type>
     </meta:Field>
+    <meta:RelativeField>
+      <name>post
+      </name>
+      <type><cms:BlogPost.type/>
+      </type>
+      <fieldList>blogPostId
+      </fieldList>
+    </meta:RelativeField>    
   </fields>
   
   <keys>
@@ -37,4 +48,8 @@
       </fieldList>
     </meta:Key>
   </keys>
+  
+  <methods>
+    <dm:ForId/>
+  </methods>
 </meta:Type>

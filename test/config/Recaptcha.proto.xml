@@ -1,0 +1,6 @@
+<rc:Config
+  xmlns:rc="class:/spiralcraft/recaptcha/"
+  >
+  <publicKey>6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI</publicKey>
+  <privateKey>6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe</privateKey>
+</rc:Config>
