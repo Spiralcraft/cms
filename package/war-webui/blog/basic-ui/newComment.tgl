@@ -49,6 +49,7 @@
                     ,commenterId=[swa:Session].user.id
                     ,[editor].anon?[rcw:recaptcha].validate():null
                     ,commenterIP=[http:HttpServletRequest].remoteAddr
+                    ,approved=[swa:Session].user.superUser
                   }
                   '
               %>
