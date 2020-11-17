@@ -1,15 +1,15 @@
 <script>
   import Switch from './Switch.svelte';
   
-  export let commentDate;
-  export let content;
-  export let displayName;
+  export let commentDate="";
+  export let content="";
+  export let displayName="";
   export let approved=false;
   export let deleted=false;
+  export let id="";
+  export let postTitle="";
+  export let commenterIP="";
   export let api;
-  export let id;
-  export let postTitle;
-  export let commenterIP;
   
   const toggleApproved = function()
     { 
@@ -27,7 +27,7 @@
 </script>
 
 <div class='card'>
-  <h3 class="comment-byline">{new Date(commentDate).toLocaleString()} - {displayName}</h3>
+  <h3 class="comment-byline">{commentDate?new Date(commentDate).toLocaleString():""} - {displayName}</h3>
   <p class="post-info"><i>commented on</i> <strong>{postTitle}</strong></p>
   <p class="commenterIP"><i>IP address:</i> <strong>{commenterIP}</strong></p>
   <p class="content">{content}</p>
