@@ -4,7 +4,7 @@
   tgns:swm="class:/spiralcraft/webapp/meta/"
   tgns:h="class:/spiralcraft/servlet/webui/components/html"
   activityTitle='CMS Admin'
-  activityClass='cmsAdmin-activity'
+  activityClass='cmsAdmin-activity cms-admin-applet-container'
   crumbTrailX='[{ [@swm:Path].(path:="/",name:="Home")
                  ,[@swm:Path].(path:="/admin/",name:="Admin")
                  ,[@swm:Path].(path:="/admin/cms/",name:="CMS")
@@ -13,6 +13,6 @@
   %>
   <%RenderTo target="[h:Page].head"%>
     <link rel="stylesheet" href="/js/spiralcraft-cms/admin/applet.css">  
-	<script type="module" src='/js/spiralcraft-cms/admin/applet.js'></script>    
+	  <script type="module" src='/js/spiralcraft-cms/admin/applet.js'></script>    
   <%/RenderTo%>
 <%/t:activity-page%>

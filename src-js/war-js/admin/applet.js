@@ -1,7 +1,7 @@
 import App from './Applet.svelte';
 
 const app = new App({
-	target: document.querySelector(".activity-container"),
+	target: document.querySelector(".cms-admin-applet-container"),
 	props: {
 		name: 'world'
 	}
