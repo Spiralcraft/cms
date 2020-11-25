@@ -9,12 +9,13 @@
   let start;
   let end;
   
-  api.fetchCommentsForModeration((data) => { console.log("data="+JSON.stringify(data)); things=data; });
+  let comments=api.commentsForModeration;
+  comments.refresh();
 </script>
 
 <h3>Comment Moderation</h3>
 <div class="container">
-  <VirtualList items={things} bind:start bind:end let:item>
+  <VirtualList items={$comments} bind:start bind:end let:item>
     <CommentModerationItem {...item} api={api}/>
   </VirtualList>
   <p>showing items {start}-{end}</p>

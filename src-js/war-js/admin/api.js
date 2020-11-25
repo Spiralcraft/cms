@@ -1,3 +1,4 @@
+
 export default function(options) 
 {
   console.log("BaseURI is "+options.baseURL);
@@ -52,14 +53,14 @@ export default function(options)
           JSON.stringify(data)
         );
         
-      },      
+      },    
     fetchCommentsForModeration: function(callback)
       { return api.getJSON("commentsAdmin/",callback);
       },
     setApproved: function(callback,id,approved)
       { return api.postJSON
         ("commentsAdmin/"+id+"/.approve"
-        ,callback
+        ,function(data) { api.commentsForModeration.updateRow(data); callback(data); }
         ,{ approved: approved }
         );
         
@@ -67,7 +68,7 @@ export default function(options)
     setDeleted: function(callback,id,deleted)
       { return api.postJSON
         ("commentsAdmin/"+id+"/.delete"
-        ,callback
+        ,function(data) { api.commentsForModeration.updateRow(data); callback(data); }
         ,{ deleted: deleted }
         );
         
@@ -75,5 +76,68 @@ export default function(options)
       
   } 
   
+  api.commentsForModeration=new CommentsForModerationStore(api);
+  
   return api;
+}
+
+class ArrayStore
+{ 
+  
+  constructor(api)
+  {
+    this.api=api;
+    this.data=[];
+    this.subscribers=[];
+  }
+    
+  set(data)
+  { 
+    this.data=data;
+    this.notifySubscribers();
+  }
+  
+  notifySubscribers()
+  {
+    for (var i=0;i<this.subscribers.length;i++)
+    { this.subscribers[i](this.data);
+    }
+  }
+  
+  subscribe(callback)
+  { 
+    this.subscribers.push(callback);
+    callback(this.data);
+    return function() 
+      { this.subscribers
+         =this.subscribers.filter(function(val) { return val!=callback })
+      };
+  }
+    
+   
+    
+}
+
+class CommentsForModerationStore extends ArrayStore
+{
+  constructor(api)
+  { super(api);
+  }
+  
+  refresh()
+  { 
+    var self=this;
+    this.api.fetchCommentsForModeration
+     ( function(data) { self.set(data) } );
+  }
+  
+  updateRow(newRow)
+  {
+    var i=this.data.findIndex((oldRow) => { return oldRow.id==newRow.id });
+    if (i>=0)
+    { 
+      this.data[i]=newRow;
+      this.notifySubscribers();
+    }
+  }
 }
