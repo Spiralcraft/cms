@@ -57,6 +57,13 @@ export default function(options)
     fetchCommentsForModeration: function(callback)
       { return api.getJSON("commentsAdmin/",callback);
       },
+    expungeDeletedComments: function(callback)
+      { return api.postJSON
+        ("commentsAdmin/.expungeDeleted"
+        ,callback
+        ,{}
+        )
+      },
     setApproved: function(callback,id,approved)
       { return api.postJSON
         ("commentsAdmin/"+id+"/.approve"
@@ -139,5 +146,12 @@ class CommentsForModerationStore extends ArrayStore
       this.data[i]=newRow;
       this.notifySubscribers();
     }
+  }
+  
+  expunge()
+  {
+    var self=this;
+    this.api.expungeDeletedComments
+      ( ()=>self.refresh() );
   }
 }

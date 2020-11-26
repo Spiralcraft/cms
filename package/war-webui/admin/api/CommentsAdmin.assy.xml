@@ -38,6 +38,21 @@
   
   </defaultHandler>
   <handlers>
+    <rpc:JsonTaskHandler>
+      <name>.expungeDeleted
+      </name>
+      <task>
+        <dt:Transaction>
+          <chain>
+            <t:Eval>
+              <x>[*dt:Fetch{[@cms:BlogComment.list],`.deleted==true`}].()
+                  #{ .[*dt:Edit{ action:=`@tuple.delete()`}].() }
+              </x>
+            </t:Eval>
+          </chain>
+        </dt:Transaction>
+      </task>
+    </rpc:JsonTaskHandler>
     <rpc:DispatchHandler>
       <name>*
       </name>
@@ -58,6 +73,9 @@
                      :[@swm:User].@forId(..commenterId).commonName
                    , approved:=..approved
                    , deleted:=..deleted
+                   , postTitle:=..post.title
+                   , commenterIP:=..commenterIP
+                   
                    } 
                  }            
             `
