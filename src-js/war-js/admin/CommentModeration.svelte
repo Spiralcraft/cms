@@ -16,10 +16,14 @@
 </script>
 
 <div class="_activity-header">
-  <h3>Comment Moderation</h3>
+  <div class="_activiy-title">
+    <h3>Comment Moderation</h3>
+  </div>
+  <div class="_flex_space">
+  </div>
   <div class="_toolbar">
     <button class="_svgIconButton" on:click={()=>comments.expunge()}
-      tooltip="Expunge deleted comments"
+      title="Expunge deleted comments"
       >
       <SvgIcon d="{trashIcon}" stroke="#FFFFFF"/>
     </button>
@@ -40,6 +44,15 @@
   }
   
   
+  ._activity-header
+  { 
+    display: flex;
+    flex-direction: row;
+  }
+  
+  ._flex_space
+  { flex: 1;
+  }
   
   ._activity-header h3 
   { display: inline-block; 
