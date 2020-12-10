@@ -1,5 +1,5 @@
 <script>
-  import Switch from './Switch.svelte';
+  import Switch from '@spiralcraft/svelte-elements/Switch.svelte';
   
   export let commentDate="";
   export let content="";

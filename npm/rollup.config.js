@@ -1,8 +1,9 @@
 import svelte from 'rollup-plugin-svelte';
 import resolve from '@rollup/plugin-node-resolve';
+import alias from '@rollup/plugin-alias';
 import commonjs from '@rollup/plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
-import multiInput from 'rollup-plugin-multi-input';
+// import multiInput from 'rollup-plugin-multi-input';
 import cloneDeep from 'clone-deep';
 import path from 'path';
 
@@ -15,7 +16,7 @@ const template= {
     name: "applet"
   },
   plugins: [
-    ,svelte({
+    svelte({
       // enable run-time checks when not in production
       dev: !production,
       // we'll extract any component CSS out into
@@ -37,6 +38,15 @@ const template= {
       customResolveOptions: {
         moduleDirectory: path.resolve('node_modules')
       }      
+    }),
+    alias({
+      resolve: ['.js','.svelte'],
+      entries: [
+        {
+          find: '@spiralcraft',
+          replacement: path.resolve(__dirname, '../lib-js/spiralcraft')
+        }
+      ]
     }),
     commonjs(),
 

@@ -1,8 +1,8 @@
 <script>
   import VirtualList from '@sveltejs/svelte-virtual-list';
   import CommentModerationItem from './CommentModerationItem.svelte';
-  import SvgIcon from './SvgIcon.svelte';
-  import {trashIcon} from './AppIcons'
+  import SvgIcon from '@spiralcraft/svelte-elements/SvgIcon.svelte';
+  import {trashIcon} from '@spiralcraft/svelte-elements/AppIcons';
   import m_api from './api.js';
   
   var api = m_api({baseURL: "api"});

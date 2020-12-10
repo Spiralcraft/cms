@@ -17,6 +17,7 @@
     <dependency org="spiralcraft" name="archetype" rev="[0.4.17-dev,0.5-dev["/>
     <dependency org="spiralcraft"  name="recaptcha" rev="[0.4.17-dev3,0.4.18-dev["/>
     <dependency org="spiralcraft" name="servlet" rev="[0.4.17-dev112,0.5-dev[" conf="dev->default"/>
+    <dependency org="spiralcraft" name="svelte" rev="[0.4.17-dev1,0.5-dev["/>
     <dependency org="spiralcraft" name="webapp" rev="[0.4.17-dev,0.5-dev[" conf="dev->default"/>
     <dependency org="moxiecode" name="tinymce" rev="[4.1.10,5.0[" conf="dev->default"/>
     <dependency org="bevacqua" name="rome" rev="[2.1.22,)" conf="dev->default"/>
