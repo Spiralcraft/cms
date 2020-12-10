@@ -16,6 +16,7 @@
   </target>
   
   <target name="post-retrieve" depends="build-ivy.post-retrieve">
+    <!-- XXX Build into base build to iterate over all packages and extract lib-js bundle -->
     <unzip src="packages/spiralcraft-svelte.zip" dest="lib-js">
       <patternset>
         <include name="lib-js/**"/>
