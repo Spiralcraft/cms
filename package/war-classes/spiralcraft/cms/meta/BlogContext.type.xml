@@ -5,6 +5,7 @@
   xmlns:dt="class:/spiralcraft/data/task/"
   xmlns:j="class:/java/lang/"
   xmlns:swa="class:/spiralcraft/webapp/meta/"
+  xmlns:wt="class:/spiralcraft/webtraffic/"
   >
   <description>A non-persistent type that provides constant-scoped components
     access to a blog
@@ -119,7 +120,13 @@
       </returnType>
       <contextX>[#p] { user:[@swa:User], blogPost:[@cms:BlogPost] }
       </contextX>
-      <x>(user==null &amp;&amp; [cms:BlogContext].allowAnonComments) || user!=null
+      <x>
+        ![wt:Session].flagged
+        &amp;&amp; 
+        ((user==null &amp;&amp; [cms:BlogContext].allowAnonComments) 
+          || user!=null
+        )
+          
       </x>
     </meta:Method>
   </methods>

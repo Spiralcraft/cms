@@ -6,6 +6,7 @@
   xmlns:swm="class:/spiralcraft/webapp/meta"
   xmlns:j="class:/java/lang/"
   xmlns:fn="class:/spiralcraft/lang/functions"
+  xmlns:wt="class:/spiralcraft/webtraffic"
   >
   <debug>false
   </debug>
@@ -28,6 +29,7 @@
                  , approved:=..approved
                  , postTitle:=..post.title
                  , commenterIP:=..commenterIP
+                 , flagged:=[@wt:IPInfo].@forIP(..commenterIP).flagged
                  } 
                }.[*fn:Sort{`.commentDate`,true}]
           </x>
@@ -75,7 +77,7 @@
                    , deleted:=..deleted
                    , postTitle:=..post.title
                    , commenterIP:=..commenterIP
-                   
+                   , flagged:=[@wt:IPInfo].@forIP(..commenterIP).flagged
                    } 
                  }            
             `
@@ -139,6 +141,44 @@
                 :@{[commentsAdmin].comment
                      =[commentsAdmin].comment
                        .[*dt:Edit{ action:=`.deleted=[p].deleted`}].()
+                  ,[commentsAdmin].response()
+                  }
+              </x>
+            </t:Eval>
+          </task>
+        </rpc:JsonTaskHandler>      
+        <rpc:JsonTaskHandler>
+          <name>
+            .flagIP
+          </name>
+          <task>
+            <t:Eval>
+              <contextX>
+                [#p] 
+                { flagged:[@j:Boolean] 
+                }
+              </contextX>
+              <x>
+                ![rpc:Call].request.isPost()
+                ?[rpc:Call].respond(422,"Method requires HTTP POST request")              
+                :[p].flagged==null
+                ?[rpc:Call].respond(422,"Missing required value for [flagged]")
+                :@{ [p].flagged
+                      ? @{ [@wt:IPInfo].@flag
+                           ([commentsAdmin].comment.commenterIP
+                           ,"admin"
+                           ,"spammer"
+                           ,""
+                           )
+                        ,null
+                        }
+                      : @{ [@wt:IPInfo].@unflag
+                           ([commentsAdmin].comment.commenterIP
+                           ,"admin"
+                           ,"spammer"
+                           )
+                        ,null
+                        }
                   ,[commentsAdmin].response()
                   }
               </x>

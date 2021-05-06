@@ -79,6 +79,14 @@ export default function(options)
         ,{ deleted: deleted }
         );
         
+      },
+    setFlagged: function(callback,id,flagged)
+      { return api.postJSON
+        ("commentsAdmin/"+id+"/.flagIP"
+        ,function(data) { api.commentsForModeration.updateRow(data); callback(data); }
+        ,{ flagged: flagged }
+        );
+        
       }
       
   } 

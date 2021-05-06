@@ -1,11 +1,12 @@
 <script>
   import Switch from '@spiralcraft/svelte-elements/Switch.svelte';
-  
+  import CustomInput from '@vfs/spiralcraft/svelte/vui/twbs5/Input.svelte';
   export let commentDate="";
   export let content="";
   export let displayName="";
   export let approved=false;
   export let deleted=false;
+  export let flagged=false;
   export let id="";
   export let postTitle="";
   export let commenterIP="";
@@ -22,6 +23,13 @@
     { 
       api.setDeleted((data) => { },id,deleted);
       console.log('Deleted: '+deleted);
+      
+    };
+
+  const toggleFlagged = function()
+    { 
+      api.setFlagged((data) => { },id,flagged);
+      console.log('Flagged: '+deleted);
       
     };
 </script>
@@ -54,6 +62,18 @@
         >
       </Switch>
       <span class="switch-label">Delete
+      </span>
+    </span>
+    <span class='control'>
+      <Switch checkedColor="red" 
+        uncheckedColor="black" 
+        bind:checked={flagged} 
+        onChanged={toggleFlagged}
+        height="1.5em"
+        width="2.8em"
+        >
+      </Switch>
+      <span class="switch-label">Flagged
       </span>
     </span>
   </div>

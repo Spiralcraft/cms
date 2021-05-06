@@ -1,10 +1,12 @@
 <base:PlaceContext
   xmlns:base="context://package-base/config/"
   xmlns:cms="context://code/spiralcraft-cms/config/"
+  xmlns:wt="context://code/spiralcraft-webtraffic/config/"
   xmlns:vfsc="class:/spiralcraft/vfs/context/"
   >
   <plugins>
     <cms:Plugin/>
+    <wt:Plugin/>
   </plugins>
   
 </base:PlaceContext>

@@ -52,7 +52,10 @@
                     <div class="sc-cms-comment">
                       <div class="byline">
                         <span class="date">  <%DateFormat x="commentDate" format="MM/dd/yyyy h:mm a"/%></span>
-                        <span class="poster"><%=[@th:HtmlEncoder].@encode(displayName??[@swa:User].@forId(commenterId).commonName??"Anonymous")/%></span>  
+                        <span class="poster"><%=[@th:HtmlEncoder].@encode(displayName??[@swa:User].@forId(commenterId).commonName??"Anonymous")/%></span>
+                        <%If x="commenterIP!=null && [swa:Session].user.superUser"%>
+                          <span class="poster">IP: <%=commenterIP/%></span>  
+                        <%/If%>
                       </div>
                       <div class="content">
                         <%=[@th:HtmlEncoder].@encode(content)/%>
