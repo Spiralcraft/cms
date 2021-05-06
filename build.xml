@@ -5,6 +5,9 @@
   <property name="depends.dir" location="../../repo"/>
   <property file="version.properties"/>
   
+  <property name="node-home" location="C:/Program Files/nodejs"/>
+  <property name="war.dir" location="test/war"/>
+  
   <import file="../../build/build-common.xml"/>
   
   <target name="launch" description="Launch test server">
@@ -15,18 +18,13 @@
   <target name="update-deps" depends="build-ivy.update-deps,npm-install" description="update all dependencies">
   </target>
   
-  <target name="post-retrieve" depends="build-ivy.post-retrieve">
-    <!-- XXX Build into base build to iterate over all packages and extract lib-js bundle -->
-    <unzip src="packages/spiralcraft-svelte.zip" dest="lib-js">
-      <patternset>
-        <include name="lib-js/**"/>
-      </patternset> 
-      <cutdirsmapper dirs="1"/>
-    </unzip>      
+  
+  <target name="pack" depends="update-deps,build,build-app.pack" description="bundle js and assemble package">
   </target>
   
-  <target name="pack" depends="update-deps,build-js,build-app.pack" description="bundle js and assemble package">
-  </target>
-  
+  <fileset id="war.npm-libs" dir="npm/node_modules">
+     <include name="bootstrap/dist/**"></include>
+     <include name="feather-icons/dist/**"></include>
+  </fileset>
   
 </project>
