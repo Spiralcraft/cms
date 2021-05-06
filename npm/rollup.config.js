@@ -6,6 +6,8 @@ import { terser } from 'rollup-plugin-terser';
 // import multiInput from 'rollup-plugin-multi-input';
 import cloneDeep from 'clone-deep';
 import path from 'path';
+import vfs from '../lib-js/spiralcraft/rollup-vfs/rollup-vfs.js';
+
 
 const production = true;
 
@@ -32,6 +34,7 @@ const template= {
     // some cases you'll need additional configuration -
     // consult the documentation for details:
     // https://github.com/rollup/plugins/tree/master/packages/commonjs
+    vfs(),
     resolve({
       browser: true,
       dedupe: ['svelte','svelte/internal'],
