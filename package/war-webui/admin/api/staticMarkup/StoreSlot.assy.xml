@@ -1,0 +1,38 @@
+<rpc:DispatchHandler
+  xmlns:rpc="class:/spiralcraft/servlet/rpc/"
+  xmlns:j="class:/java/lang"
+  xmlns:dt="class:/spiralcraft/data/task"
+  xmlns:fmt="context://code/api/spa/formats"
+  xmlns:cms="class:/spiralcraft/cms/meta"
+  >
+  <name>storeSlot
+  </name>
+  <contextX>
+  [#api]
+  {
+
+  }
+  </contextX>
+  <defaultHandler>
+    <rpc:JsonHandler>
+      <params>
+        [#p] { slotId:[@j:String], content:[@j:String] }
+      </params>
+      <result>
+        
+        { item:=[cms:MarkupCache].map.put
+            ([@cms:MarkupItem]
+              .(slotId:=[p].slotId
+               ,content:=[p].content
+               )
+            )
+            {{ ~slotId,
+               ~contentType,
+               ~content,
+            }}
+        }
+      </result>
+    </rpc:JsonHandler>
+  </defaultHandler>
+    
+</rpc:DispatchHandler>

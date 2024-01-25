@@ -1,0 +1,33 @@
+<rpc:DispatchHandler
+  xmlns:rpc="class:/spiralcraft/servlet/rpc/"
+  xmlns:j="class:/java/lang"
+  xmlns:dt="class:/spiralcraft/data/task"
+  xmlns:fmt="context://code/api/spa/formats"
+  xmlns:cms="class:/spiralcraft/cms/meta"
+  >
+  <name>fetchSlot
+  </name>
+  <contextX>
+  [#api]
+  {
+
+  }
+  </contextX>
+  <defaultHandler>
+    <rpc:JsonHandler>
+      <params>
+        [#p] { slotId:[@j:String] }
+      </params>
+      <result>
+        { 
+          item:=[cms:MarkupCache].map.get([p].slotId)
+          {{ ~slotId,
+             ~contentType,
+             ~content,
+          }}
+        }
+      </result>
+    </rpc:JsonHandler>
+  </defaultHandler>
+    
+</rpc:DispatchHandler>

@@ -6,7 +6,9 @@
   xmlns:j="class:/java/lang/"
   >
   <description>A self contained collection of content that is maintained and
-    published according to a common set of rules and methods.
+    published according to a common set of rules and methods. This is a loosely
+    coupled root CMS entity that provided context to organize various collections
+    of different types as needed.
   </description>
   
   <fields>

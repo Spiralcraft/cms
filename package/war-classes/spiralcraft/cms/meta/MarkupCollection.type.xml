@@ -1,0 +1,72 @@
+<meta:Type
+  xmlns:meta="class:/spiralcraft/data/types/meta/"
+  xmlns:ju="class:/java/util/"
+  xmlns:cms="class:/spiralcraft/cms/meta/"
+  xmlns:dt="class:/spiralcraft/data/task/"
+  xmlns:j="class:/java/lang/"
+  xmlns:us="class:/spiralcraft/util/string/"
+  xmlns:fn="class:/spiralcraft/lang/functions/"
+  >
+  <archetype>
+    <cms:AbstractCollection.type>
+      <itemType><cms:MarkupItem.type/>
+      </itemType>
+      <commentType><cms:AbstractItemComment.type/>
+      </commentType>
+    </cms:AbstractCollection.type>
+  </archetype>
+  
+  <methods>
+    <meta:Method>
+      <name>itemForSlotId
+      </name>
+      
+      <parameterTypes>
+        <String.type/>
+      </parameterTypes>
+      
+      <returnType><cms:MarkupItem.type/>
+      </returnType>
+      
+      <contextX>
+        [#p] { id:[@j:String] }
+      </contextX>
+      
+      <x>
+        [*dt:Fetch
+          {[meta:Type].itemType
+          ,[{ `collectionId:=[cms:MarkupCollection].id`,`slotId:=[p].id` }]
+          }
+        ].()
+      </x>
+      
+    </meta:Method>    
+    <meta:TransactionMethod>
+      <name>store
+      </name>
+      <parameterTypes>
+        <cms:MarkupItem.type/>
+      </parameterTypes>
+      <returnType>
+        <cms:MarkupItem.type/>
+      </returnType>
+      <contextX>
+        [#p] { item:[@cms:MarkupItem] }
+      </contextX>
+      <x>
+        [cms:MarkupCollection].itemForSlotId([p].item.slotId)
+        .[*dt:Edit
+           { autoCreate:=true
+            ,action:=`@{ .collectionId=[cms:MarkupCollection].id
+                     , .slotId=[p].item.slotId
+                     , .contentType=[p].item.contentType
+                     , .content=[p].item.content
+                     }
+                    `
+           }
+         ].()
+      </x>
+    </meta:TransactionMethod>
+
+  </methods>
+</meta:Type>

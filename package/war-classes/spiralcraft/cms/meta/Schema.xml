@@ -2,6 +2,7 @@
   xmlns:meta="class:/spiralcraft/data/types/meta/"
   xmlns:cms="class:/spiralcraft/cms/meta/"
   >
+  <name>spiralcraft-cms</name>
   <entities>
     <meta:Entity>
       <type><cms:Catalog.type/>
@@ -33,6 +34,14 @@
     </meta:Entity>
     <meta:Entity>
       <type><cms:MediaResource.type/>
+      </type>
+    </meta:Entity>
+    <meta:Entity>
+      <type><cms:MarkupCollection.type/>
+      </type>
+    </meta:Entity>
+    <meta:Entity>
+      <type><cms:MarkupItem.type/>
       </type>
     </meta:Entity>
   </entities>

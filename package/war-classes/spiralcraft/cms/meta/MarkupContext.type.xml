@@ -1,0 +1,26 @@
+<meta:Type
+  xmlns:meta="class:/spiralcraft/data/types/meta/"
+  xmlns:cms="class:/spiralcraft/cms/meta/"
+  >
+  <archetype>
+    <cms:CollectionContext.type>
+      <abstract>true
+      </abstract>
+      <collectionType>
+        <cms:MarkupCollection.type/>
+      </collectionType>
+    </cms:CollectionContext.type>
+  </archetype>
+  
+  <fields>
+    <meta:Field>
+      <name>staticSlots
+      </name>
+      <description>A list of static slots referenced by templates to 
+        pull in user-specified markup.
+      </description>
+      <type><cms:MarkupSlot.list.type/>
+      </type>
+    </meta:Field>
+  </fields>
+</meta:Type>

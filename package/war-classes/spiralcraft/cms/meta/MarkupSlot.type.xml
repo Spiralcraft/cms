@@ -1,0 +1,22 @@
+<meta:Type
+  xmlns:meta="class:/spiralcraft/data/types/meta/"
+  >
+  <description>A slot in a template that is filled with
+    user-defined content.
+  </description>
+  
+  <fields>
+    <meta:Field>
+      <name>slotId
+      </name>
+      <type><String.type/>
+      </type>
+    </meta:Field>
+    <meta:Field>
+      <name>name
+      </name>
+      <type><String.type/>
+      </type>
+    </meta:Field>
+  </fields>
+</meta:Type>

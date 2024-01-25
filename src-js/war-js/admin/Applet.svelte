@@ -1,12 +1,24 @@
 <script>
+  import { onMount } from "svelte";
   import CommentModeration from './CommentModeration.svelte';
+  import StaticMarkupEditor from './StaticMarkupEditor.svelte';
+  export let view;
+  export let viewProps;
   
-  
+  onMount(
+    () => {
+      console.log("view: " + view);
+     }
+  );
 </script>
 
 <div class="cmp-container">
-  <CommentModeration/>
-  
+  {#if view=="comment-moderation"}
+    <CommentModeration/>
+  {/if}
+  {#if view=="static-markup-editor"}
+    <StaticMarkupEditor {viewProps}/>
+  {/if}
 </div>
 
 <style>

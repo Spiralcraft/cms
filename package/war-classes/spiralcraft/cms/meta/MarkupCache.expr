@@ -1,0 +1,17 @@
+ns:cms=class:/spiralcraft/cms/meta
+ns:fn=class:/spiralcraft/lang/functions
+ns:j=class:/java/lang
+
+[#cms:MarkupCache]
+{
+  map:=[*fn:CacheMap
+        { [@j:String]
+        , [@cms:MarkupItem]
+        , :.slotId 
+        , storeFn:=:[cms:MarkupContext].collection.store(.)
+        , fetchFn:=:[cms:MarkupContext].collection.itemForSlotId(.)
+        }
+       ]
+
+}
+

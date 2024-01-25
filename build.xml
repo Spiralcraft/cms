@@ -25,6 +25,7 @@
   <fileset id="war.npm-libs" dir="npm/node_modules">
      <include name="bootstrap/dist/**"></include>
      <include name="feather-icons/dist/**"></include>
+     <include name="tinymce/**"></include>
   </fileset>
   
 </project>

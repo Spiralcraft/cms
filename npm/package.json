@@ -14,7 +14,10 @@
     "svelte": "^3.38.2"
   },
   "dependencies": {
+    "@tinymce/tinymce-svelte": "^2.0.1",
     "bootstrap": "^5.0.0",
-    "sveltestrap": "^5.0.0-beta.3-2"
+    "svelte-select": "^5.8.3",
+    "sveltestrap": "^5.0.0-beta.3-2",
+    "tinymce": "^6.8.2"
   }
 }

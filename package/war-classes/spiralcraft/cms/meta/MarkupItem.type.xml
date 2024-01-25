@@ -1,0 +1,38 @@
+<meta:Type
+  xmlns:meta="class:/spiralcraft/data/types/meta/"
+  xmlns:ju="class:/java/util/"
+  xmlns:cms="class:/spiralcraft/cms/meta/"
+  >
+  <description>
+    A piece of user-editable markup.
+  </description>
+  <archetype>
+    <cms:AbstractCollectionItem.type>
+      <collectionType><cms:MarkupCollection.type/>
+      </collectionType>
+      <commentType><cms:AbstractItemComment.type/>
+      </commentType>
+    </cms:AbstractCollectionItem.type>
+  </archetype>
+  
+  <fields>
+    <meta:Field>
+      <name>slotId
+      </name>
+      <type><String.type/>
+      </type>
+    </meta:Field>
+    <meta:Field>
+      <name>contentType
+      </name>
+      <type><String.type/>
+      </type>
+    </meta:Field>
+    <meta:Field>
+      <name>content
+      </name>
+      <type><String.type/>
+      </type>
+    </meta:Field>
+  </fields>
+</meta:Type>

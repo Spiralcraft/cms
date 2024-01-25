@@ -1,0 +1,26 @@
+<rpc:DispatchHandler
+  xmlns:rpc="class:/spiralcraft/servlet/rpc/"
+  xmlns:j="class:/java/lang"
+  xmlns:dt="class:/spiralcraft/data/task"
+  xmlns:fmt="context://code/api/spa/formats"
+  xmlns:cms="class:/spiralcraft/cms/meta"
+  >
+  <name>staticSlots
+  </name>
+  <contextX>
+  [#api]
+  {
+
+  }
+  </contextX>
+  <defaultHandler>
+    <rpc:JsonHandler>
+      <result>
+        {
+          slots:=[cms:MarkupContext].staticSlots
+        }
+      </result>
+    </rpc:JsonHandler>
+  </defaultHandler>
+    
+</rpc:DispatchHandler>

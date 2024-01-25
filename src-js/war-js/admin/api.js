@@ -42,7 +42,7 @@ export default function(options)
             if (val!=null && val.length>0) 
             { 
               var jval=SPIRALCRAFT.json.parse(val); 
-              console.log("POST ",method,jval);
+              console.log("POST ",method,data,jval);
            
               if (callback) { callback(jval); }
             } else 

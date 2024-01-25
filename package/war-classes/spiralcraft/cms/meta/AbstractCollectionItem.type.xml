@@ -72,8 +72,6 @@
       </name>
       <type><String.type/>
       </type>
-      <required>true
-      </required>
       <uniqueValue>true
       </uniqueValue>
       <template>true
