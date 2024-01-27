@@ -12,6 +12,6 @@ ns:j=class:/java/lang
         , fetchFn:=:[cms:MarkupContext].collection.itemForSlotId(.)
         }
        ]
-
+  ,render:=[#{{ slotId:[@j:String] }}]{ ..map.get(.slotId).content??("UNDEFINED: "+.slotId) }
 }
 
