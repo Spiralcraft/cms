@@ -8,8 +8,8 @@ ns:j=class:/java/lang
         { [@j:String]
         , [@cms:MarkupItem]
         , :.slotId 
-        , storeFn:=:[cms:MarkupContext].collection.store(.)
-        , fetchFn:=:[cms:MarkupContext].collection.itemForSlotId(.)
+        , storeFn:=:[cms:MarkupContext].ensureCollection().store(.)
+        , fetchFn:=:[cms:MarkupContext].ensureCollection().itemForSlotId(.)
         }
        ]
   ,render:=[#{{ slotId:[@j:String] }}]{ ..map.get(.slotId).content??("UNDEFINED: "+.slotId) }
