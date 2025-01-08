@@ -64,6 +64,23 @@
       <type><Boolean.type/>
       </type>
     </meta:Field>
+    <meta:Field>
+      <name>allowNewComments
+      </name>
+      <description>Whether to allow any more comments across the blog
+      </description>
+      <type><Boolean.type/>
+      </type>
+    </meta:Field>
+    <meta:Field>
+      <name>requireCommenterApproval
+      </name>
+      <description>Only approved commenters can comment
+      </description>
+      <type><Boolean.type/>
+      </type>
+    </meta:Field>
+
   </fields>
   
   <methods>
@@ -121,10 +138,12 @@
       <contextX>[#p] { user:[@swa:User], blogPost:[@cms:BlogPost] }
       </contextX>
       <x>
+        [cms:BlogContext].allowNewComments
+        &amp;&amp; 
         ![wt:Session].flagged
         &amp;&amp; 
         ((user==null &amp;&amp; [cms:BlogContext].allowAnonComments) 
-          || user!=null
+          || user!=null 
         )
           
       </x>
