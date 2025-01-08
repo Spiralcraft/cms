@@ -1,17 +1,43 @@
+function encodeQueryComponent(val)
+{
+  return encodeURIComponent(val).
+    replace(/%40/gi, '@').
+    replace(/%3A/gi, ':').
+    replace(/%24/g, '$').
+    replace(/%2C/gi, ',').
+    replace(/%3B/gi, ';').
+    replace(/%20/g, '+');
+}
+
+function encodeQuery(obj , prefix)
+{
+    let str = [];
+    for (let p in obj) {
+      if (obj.hasOwnProperty(p)) {
+        let k = prefix ? prefix + "." + p : p;
+        let v = obj[p];
+        str.push((v !== null && typeof v === "object") ?
+          encodeQuery(v, k) :
+          encodeQueryComponent(k) + "=" + encodeQueryComponent(v));
+      }
+    }
+    return str.join("&");
+}
 
 export default function(options) 
 {
   console.log("BaseURI is "+options.baseURL);
   var api = {
-    get: function(method,callback)
+    get: function(method,callback,query)
       {
-        return SPIRALCRAFT.ajax.get(options.baseURL+(method?("/"+method):""),callback);        
+        let url=options.baseURL + (method?("/"+method):"") + (query?("?"+encodeQuery(query)):"");
+        return SPIRALCRAFT.ajax.get(url,callback);        
       },
     post: function(method,callback,data)
       {
         return SPIRALCRAFT.ajax.post(options.baseURL+(method?("/"+method):""),callback,data);
       },
-    getJSON: function(method,callback)
+    getJSON: function(method,callback,query)
       {
         return api.get
         (
@@ -28,7 +54,9 @@ export default function(options)
             { 
               if (callback) { callback(null); } 
             }
-          }
+          },
+          query
+          
         );
         
       },
@@ -54,8 +82,8 @@ export default function(options)
         );
         
       },    
-    fetchCommentsForModeration: function(callback)
-      { return api.getJSON("commentsAdmin/",callback);
+    fetchCommentsForModeration: function(callback,query)
+      { return api.getJSON("commentsAdmin/",callback,query);
       },
     expungeDeletedComments: function(callback)
       { return api.postJSON
@@ -139,11 +167,11 @@ class CommentsForModerationStore extends ArrayStore
   { super(api);
   }
   
-  refresh()
+  refresh(query)
   { 
     var self=this;
     this.api.fetchCommentsForModeration
-     ( function(data) { self.set(data) } );
+     ( function(data) { self.set(data) } , query);
   }
   
   updateRow(newRow)
@@ -156,10 +184,10 @@ class CommentsForModerationStore extends ArrayStore
     }
   }
   
-  expunge()
+  expunge(query)
   {
     var self=this;
     this.api.expungeDeletedComments
-      ( ()=>self.refresh() );
+      ( ()=>self.refresh(query) );
   }
 }

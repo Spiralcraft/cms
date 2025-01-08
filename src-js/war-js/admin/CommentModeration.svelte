@@ -11,18 +11,21 @@
   let start;
   let end;
   
+  let query={limit: 100};
+
   let comments=api.commentsForModeration;
-  comments.refresh();
+  comments.refresh(query);
+  
 </script>
 
 <div class="_activity-header">
-  <div class="_activiy-title">
+  <div class="_activity-title">
     <h3>Comment Moderation</h3>
   </div>
   <div class="_flex_space">
   </div>
   <div class="_toolbar">
-    <button class="_svgIconButton" on:click={()=>comments.expunge()}
+    <button class="_svgIconButton" on:click={()=>comments.expunge(query)}
       title="Expunge deleted comments"
       >
       <SvgIcon d="{trashIcon}" stroke="#FFFFFF"/>

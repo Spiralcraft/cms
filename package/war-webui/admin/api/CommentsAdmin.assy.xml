@@ -11,32 +11,43 @@
   <debug>false
   </debug>
   <defaultHandler>
-    <rpc:JsonTaskHandler
+    <rpc:JsonHandler
       >
-      <task>
-        <t:Eval>
-          <x>
-            [*dt:Fetch{[@cms:BlogComment.list]}].()
-              #{ { id:=..id 
-                 ,commenterId:=..commenterId
-                 , commentDate:=..commentDate
-                 , content:=..content 
-                 , displayName:=
-                   ..displayName!=null
-                   ?..displayName
-                   :[@swm:User].@forId(..commenterId).commonName
-                 , deleted:=..deleted
-                 , approved:=..approved
-                 , postTitle:=..post.title
-                 , commenterIP:=..commenterIP
-                 , flagged:=[@wt:IPInfo].@forIP(..commenterIP).flagged
-                 } 
-               }.[*fn:Sort{`.commentDate`,true}]
-          </x>
-        </t:Eval>
-      </task>
+      <params>
+        [#q] {
+          offset:[@j:Integer]=0
+          ,limit:[@j:Integer]
+        }
+      </params>
+      <queryParams>offset
+      </queryParams>
+      <queryParams>limit
+      </queryParams>
+      <result>
+        [*dt:Fetch{[@cms:BlogComment.list]}].()
+          #{ { id:=..id 
+             ,commenterId:=..commenterId
+             , commentDate:=..commentDate
+             , content:=..content 
+             , displayName:=
+               ..displayName!=null
+               ?..displayName
+               :[@swm:User].@forId(..commenterId).commonName
+             , deleted:=..deleted
+             , approved:=..approved
+             , postTitle:=..post.title
+             , commenterIP:=..commenterIP
+             , flagged:=[@wt:IPInfo].@forIP(..commenterIP).flagged
+             } 
+           }.[*fn:Sort{`.commentDate`,true}]
+          { 
+            [q].limit!=null
+            ?[.][[q].offset..([q].offset+[q].limit-1)]
+            :.
+          }      
+      </result>
     
-    </rpc:JsonTaskHandler>
+    </rpc:JsonHandler>
   
   </defaultHandler>
   <handlers>
