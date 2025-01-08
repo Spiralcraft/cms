@@ -1,0 +1,9 @@
+<base:PathContext
+  xmlns:base="context://package-base"
+  xmlns:af="class:/spiralcraft/servlet/autofilter"
+  xmlns:wt="class:/spiralcraft/webtraffic"
+  >
+  <filters>
+    <wt:WebTrafficFilter/>
+  </filters>
+</base:PathContext>

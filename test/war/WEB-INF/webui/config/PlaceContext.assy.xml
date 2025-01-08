@@ -5,8 +5,8 @@
   xmlns:vfsc="class:/spiralcraft/vfs/context/"
   >
   <plugins>
-    <cms:Plugin/>
     <wt:Plugin/>
+    <cms:Plugin/>
   </plugins>
   
 </base:PlaceContext>
